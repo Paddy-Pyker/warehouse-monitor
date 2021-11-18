@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/views">
+        <file alias="main.qml">views/main.qml</file>
+        <file alias="SplashScreen.qml">views/SplashScreen.qml</file>
+    </qresource>
+</RCC>

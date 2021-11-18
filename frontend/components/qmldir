@@ -1,0 +1,4 @@
+module components
+ErrorDialog 1.0 ErrorDialog.qml
+ExitDialog.qml 1.0 ExitDialog.qml
+
