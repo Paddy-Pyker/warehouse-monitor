@@ -14,9 +14,13 @@ class BACKEND_EXPORT Controller : public QObject
 public:
     explicit Controller(QObject *parent = nullptr);
 
-    //signals:
+    signals:
+    void loading_data_from_server();
+    void loading_completed_succesfully();
+    void loading_error();
 
 public slots:
+    void fetch_http_data(const QString& device_id = "");
     void http_response_is_ready();
     void internet_connection_failed();
 
@@ -25,6 +29,7 @@ private:
     QNetworkAccessManager* manager;
     QNetworkRequest request;
     QNetworkReply* response;
+    QString device_id;
 
 };
 
