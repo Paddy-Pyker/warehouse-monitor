@@ -8,11 +8,13 @@ DEFINES += BACKEND_LIBRARY
 CONFIG += c++14
 
 SOURCES += \
-    controller.cpp
+    controller.cpp \
+    readings.cpp
 
 HEADERS += \
     backend_global.h \
-    controller.h
+    controller.h \
+    readings.h
 
 # Default rules for deployment.
 unix {

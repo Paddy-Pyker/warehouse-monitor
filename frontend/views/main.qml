@@ -9,6 +9,6 @@ Window {
 
     Rectangle{
         anchors.fill: parent
-        color: "orange"
+        color: Qt.rgba(Math.random(),Math.random(),Math.random(),1)
     }
 }

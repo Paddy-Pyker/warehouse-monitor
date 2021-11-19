@@ -1,4 +1,4 @@
-#ifndef CONTROLLER_H
+﻿#ifndef CONTROLLER_H
 #define CONTROLLER_H
 
 #include "backend_global.h"
@@ -6,6 +6,8 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QList>
+#include "readings.h"
 
 
 class BACKEND_EXPORT Controller : public QObject
@@ -14,7 +16,7 @@ class BACKEND_EXPORT Controller : public QObject
 public:
     explicit Controller(QObject *parent = nullptr);
 
-    signals:
+signals:
     void loading_data_from_server();
     void loading_completed_succesfully();
     void loading_error();
@@ -27,9 +29,11 @@ public slots:
 
 private:
     QNetworkAccessManager* manager;
-    QNetworkRequest request;
     QNetworkReply* response;
+    QNetworkRequest request;
     QString device_id;
+    QList<std::shared_ptr<Readings>> total_readings;
+
 
 };
 
