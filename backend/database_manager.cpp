@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QStandardPaths>
 #include <QSqlError>
+#include <QDateTime>
 
 DatabaseManager::DatabaseManager(QObject *parent) : QObject(parent)
 {
@@ -23,6 +24,48 @@ DatabaseManager::DatabaseManager(QObject *parent) : QObject(parent)
     }
 
 
+
+}
+
+void DatabaseManager::set_device_latest_timestamp(const QString &serial_number, const QString &timestamp)
+{
+
+    QSqlQuery query;
+    query.prepare("UPDATE device_name set last_reading_timestamp=:timestamp WHERE serial_number=:serial_number");
+    query.bindValue(":timestamp",timestamp);
+    query.bindValue(":serial_number",serial_number);
+    query.exec();
+
+
+}
+
+void DatabaseManager::insert_device_readings(const QString& serial_number,const QString &_timestamp, const double &temperature, const double &humidity, const double &moisture_content)
+{
+
+    QDateTime time = QDateTime::fromMSecsSinceEpoch(_timestamp.toULongLong()*1000);
+
+    const QString TIMESTAMP = QString::number(_timestamp.toULongLong()*1000);
+    QString YEAR = time.toString("yyyy");
+    QString MONTH = time.toString("MMM");
+    QString DAY = time.toString("ddd d");
+    QString TIME = time.toString("h:mm ap");
+
+    QSqlQuery query;
+    query.prepare("INSERT INTO device_readings "
+                  "(serial_number,temperature,humidity,moisture_content,timestamp,year,month,day,time) "
+                  "VALUES (:serial_number,:temperature,:humidity,:moisture_content,:timestamp,:year,:month,:day,:time)"
+                  );
+
+    query.bindValue(":serial_number",serial_number);
+    query.bindValue(":temperature",temperature);
+    query.bindValue(":humidity",humidity);
+    query.bindValue(":moisture_content",moisture_content);
+    query.bindValue(":timestamp",TIMESTAMP);
+    query.bindValue(":year",YEAR);
+    query.bindValue(":month",MONTH);
+    query.bindValue(":day",DAY);
+    query.bindValue(":time",TIME);
+    query.exec();
 
 }
 
@@ -78,7 +121,7 @@ bool DatabaseManager::create_tables()
                    "month VARCHAR(10) NOT NULL,"
                    "day VARCHAR(10) NOT NULL,"
                    "time VARCHAR(10) NOT NULL,"
-                   "FOREIGN KEY(serial_number) REFERENCES device_name(serial_number),"
+                   "FOREIGN KEY(serial_number) REFERENCES device_name(serial_number) ON DELETE CASCADE ON UPDATE CASCADE,"
                    "PRIMARY KEY(id AUTOINCREMENT))");
 
     return query.exec() && query2.exec();
@@ -95,3 +138,5 @@ QString DatabaseManager::sqliteVersion() const
     return QString::number(-1);
 
 }
+
+

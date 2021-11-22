@@ -6,7 +6,7 @@
 #include <QJsonArray>
 #include "readings.h"
 
-NetworkManager::NetworkManager(QObject *parent) : QObject(parent)
+NetworkManager::NetworkManager(QObject *parent,DatabaseManager* _database) : QObject(parent),database(_database)
 {
 
 #if !(defined(Q_OS_ANDROID) || defined(Q_OS_IOS))
@@ -57,10 +57,6 @@ void NetworkManager::internet_connection_failed()
     //////load data from database
 }
 
-void NetworkManager::set_device_last_reading_timestamp(const QString& timestamp)
-{
-
-}
 
 void NetworkManager::http_response_is_ready()
 {
@@ -100,19 +96,19 @@ void NetworkManager::http_response_is_ready()
         timestamp = obj["date"].toString();
         double humidity = obj["hum"].toDouble();
         double temperature = obj["temp"].toDouble();
-        double moisture_content = obj["mc"].toDouble();
 
         qDebug()<<timestamp<<humidity<<temperature<<"\n\n";
-        ///insert device id and readings into database
+
+        database->insert_device_readings(device_serialnumber,timestamp,temperature,humidity);
 
     }
 
-    set_device_last_reading_timestamp(timestamp);
+    database->set_device_latest_timestamp(device_serialnumber,timestamp);
 
-    /////////////////////////////
-
-    emit loading_completed_succesfully();
 
     ///load data from database
+
+
+    emit loading_completed_succesfully();
 
 }

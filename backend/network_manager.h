@@ -5,13 +5,14 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include "database_manager.h"
 
 
 class NetworkManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit NetworkManager(QObject *parent = nullptr);
+    explicit NetworkManager(QObject *parent, DatabaseManager* _database);
 
 
 signals:
@@ -27,12 +28,13 @@ public slots:
 
 
 private:
-    void set_device_last_reading_timestamp(const QString& last_reading_timestamp = "");
+
 
     QNetworkAccessManager* manager;
     QNetworkReply* response;
     QNetworkRequest request;
     QString device_serialnumber;
+    DatabaseManager* database;
 };
 
 #endif // NETWORKMANAGER_H

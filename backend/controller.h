@@ -16,7 +16,7 @@ public:
 
 private:
 
-    std::unique_ptr<DatabaseManager> database;
+    DatabaseManager* database;
     std::unique_ptr<NetworkManager> network;
 
 
