@@ -5,5 +5,6 @@
         <file alias="fontawesome.ttf">assets/fontawesome-webfont.ttf</file>
         <file alias="corsiva.ttf">assets/911Fonts.com_MonotypeCorsiva_Regular_-_911fonts.com_fonts_gyWJ.ttf</file>
         <file alias="splashImage.png">assets/splashImage.png</file>
+        <file alias="warehouse_monitor.db">assets/warehouse_monitor.db</file>
     </qresource>
 </RCC>
