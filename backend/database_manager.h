@@ -14,7 +14,7 @@ public:
     void insert_device_readings(const QString& _serial_number,const QString& timestamp,const double& temperature,
                                 const double& humidity,const double& moisture_content=0.0);
 
-    QList<Readings*>* load_readings_from_database(const QString& _serial_number, const QString& _selectedOption, const QString& _selectedDate);
+    QList<Readings*> load_readings_from_database(const QString& _serial_number, const QString& _selectedOption, const QString& _selectedDate);
 
 
 private:

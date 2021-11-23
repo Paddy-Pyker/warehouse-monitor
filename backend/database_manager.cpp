@@ -69,7 +69,7 @@ void DatabaseManager::insert_device_readings(const QString& serial_number,const 
 
 }
 
-QList<Readings*>* DatabaseManager::load_readings_from_database(const QString& _serial_number,const QString& _selectedOption,const QString& _selectedDate)
+QList<Readings*> DatabaseManager::load_readings_from_database(const QString& _serial_number,const QString& _selectedOption,const QString& _selectedDate)
 {
 
     QDateTime time = QDateTime::fromMSecsSinceEpoch(_selectedDate.toULongLong(),Qt::UTC);  //ensure selectedDate is in ms
@@ -86,7 +86,7 @@ QList<Readings*>* DatabaseManager::load_readings_from_database(const QString& _s
         QString query_string = "SELECT temperature,humidity,timestamp from device_readings "
                                "WHERE serial_number=:serial_number GROUP by time "
                                "HAVING year=:year and month=:month and day=:day "
-                               "ORDER by timestamp";  //query_string defaults to day option
+                               "ORDER by timestamp LIMIT 10";
 
         query.prepare(query_string);
         query.bindValue(":serial_number",serial_number);
@@ -96,18 +96,68 @@ QList<Readings*>* DatabaseManager::load_readings_from_database(const QString& _s
 
     } else if (option == "weekly") {
 
-        QString query_string = "";
+        QString query_string = "SELECT Round(AVG(temperature),2) as temperature,"
+                               "Round(AVG(humidity),2) as humidity,"
+                               "timestamp from device_readings "
+                               "WHERE serial_number=:serial_number "
+                               "GROUP by day HAVING year=:year and "
+                               "month=:month ORDER by timestamp LIMIT 7";
+
+        query.prepare(query_string);
+        query.bindValue(":serial_number",serial_number);
+        query.bindValue(":year",year);
+        query.bindValue(":month",month);
+
+    } else if (option == "monthly") {
+
+        QString query_string = "SELECT Round(AVG(temperature),2) as temperature,"
+                               "Round(AVG(humidity),2) as humidity,"
+                               "timestamp from device_readings "
+                               "WHERE serial_number=:serial_number "
+                               "GROUP by month HAVING year=:year"
+                               " ORDER by timestamp LIMIT 10";
+
+        query.prepare(query_string);
+        query.bindValue(":serial_number",serial_number);
+        query.bindValue(":year",year);
+
+    } else if (option == "annually") {
+
+        QString query_string = "SELECT Round(AVG(temperature),2) as temperature,"
+                               "Round(AVG(humidity),2) as humidity,"
+                               "timestamp from device_readings "
+                               "WHERE serial_number=:serial_number "
+                               "GROUP by year ORDER by timestamp";
+
+        query.prepare(query_string);
+        query.bindValue(":serial_number",serial_number);
+    } else {
+
+
+        QString query_string = "SELECT temperature,humidity,timestamp from device_readings"
+                               " WHERE serial_number=:serial_number "
+                               "ORDER by timestamp DESC LIMIT 10";
+
+        query.prepare(query_string);
+        query.bindValue(":serial_number",serial_number);
     }
 
 
+    query.exec();
+    QList<Readings*> list_of_readings;
+
+    while (query.next()) {
+
+        Readings* readings =  new Readings(this,query.value("timestamp").toString(),
+                                           query.value("humidity").toDouble(),
+                                           query.value("temperature").toDouble());
 
 
+        list_of_readings.push_front(readings);
+
+    }
 
 
-
-    ///////////////////////////////////////////
-
-    QList<Readings*> *list_of_readings = nullptr;
 
     return list_of_readings;
 }
