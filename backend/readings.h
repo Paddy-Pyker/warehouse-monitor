@@ -13,15 +13,12 @@ class BACKEND_EXPORT Readings : public QObject
 public:
     explicit Readings(QObject *parent = nullptr, QString timestamp="", double humidy=0, double temperature=0);
 
-//signals:
+
 public:
     const QString& get_timestamp();
     const double& get_humidity();
     const double& get_temperature();
 
-//    void set_timestamp(const QString& _timestamp);
-//    void set_humidity(const double& _humidity);
-//    void set_temperature(const double& _temperature);
 
 private:
     QString Timestamp;

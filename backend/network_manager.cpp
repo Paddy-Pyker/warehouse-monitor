@@ -6,7 +6,7 @@
 #include <QJsonArray>
 #include "readings.h"
 
-NetworkManager::NetworkManager(QObject *parent,DatabaseManager* _database) : QObject(parent),database(_database)
+NetworkManager::NetworkManager(QObject *parent, DatabaseManager* _database) : QObject(parent),database(_database)
 {
 
 #if !(defined(Q_OS_ANDROID) || defined(Q_OS_IOS))
@@ -24,8 +24,6 @@ NetworkManager::NetworkManager(QObject *parent,DatabaseManager* _database) : QOb
     QSslConfiguration config = QSslConfiguration::defaultConfiguration();
     config.setProtocol(QSsl::TlsV1_2);
     request.setSslConfiguration(config);
-
-    fetch_http_data("1");
 
 }
 
@@ -55,6 +53,8 @@ void NetworkManager::internet_connection_failed()
     emit loading_error();
 
     //////load data from database
+    emit load_data_from_database(device_serialnumber);
+
 }
 
 
@@ -75,6 +75,7 @@ void NetworkManager::http_response_is_ready()
     if(jsonResponse.isNull()){
         emit loading_error();
         //////load data from database
+        emit load_data_from_database(device_serialnumber);
         return;
     }
 
@@ -83,6 +84,7 @@ void NetworkManager::http_response_is_ready()
 
     if(jsonArray.empty()){
         ///load data from database
+        emit load_data_from_database(device_serialnumber);
         return;
     }
 
@@ -107,6 +109,7 @@ void NetworkManager::http_response_is_ready()
 
 
     ///load data from database
+    emit load_data_from_database(device_serialnumber);
 
 
     emit loading_completed_succesfully();

@@ -23,19 +23,4 @@ const double &Readings::get_temperature()
     return Temperature;
 }
 
-//void Readings::set_timestamp(const QString &_timestamp)
-//{
-//    this->Timestamp=_timestamp;
-//}
-
-//void Readings::set_humidity(const double &_humidity)
-//{
-//    this->Humidity=_humidity;
-
-//}
-
-//void Readings::set_temperature(const double &_temperature)
-//{
-//    this->Temperature=_temperature;
-//}
 

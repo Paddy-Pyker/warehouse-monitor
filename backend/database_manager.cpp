@@ -42,7 +42,7 @@ void DatabaseManager::set_device_latest_timestamp(const QString &serial_number, 
 void DatabaseManager::insert_device_readings(const QString& serial_number,const QString &_timestamp, const double &temperature, const double &humidity, const double &moisture_content)
 {
 
-    QDateTime time = QDateTime::fromMSecsSinceEpoch(_timestamp.toULongLong()*1000);
+    QDateTime time = QDateTime::fromMSecsSinceEpoch(_timestamp.toULongLong()*1000,Qt::UTC);
 
     const QString TIMESTAMP = QString::number(_timestamp.toULongLong()*1000);
     QString YEAR = time.toString("yyyy");
@@ -67,6 +67,49 @@ void DatabaseManager::insert_device_readings(const QString& serial_number,const 
     query.bindValue(":time",TIME);
     query.exec();
 
+}
+
+QList<Readings*>* DatabaseManager::load_readings_from_database(const QString& _serial_number,const QString& _selectedOption,const QString& _selectedDate)
+{
+
+    QDateTime time = QDateTime::fromMSecsSinceEpoch(_selectedDate.toULongLong(),Qt::UTC);  //ensure selectedDate is in ms
+
+    QString serial_number = _serial_number;
+    QString option = _selectedOption;
+    QString year = time.toString("yyyy");
+    QString month = time.toString("MMM");
+    QString day = time.toString("ddd d");
+
+    QSqlQuery query;
+
+    if(option == "daily"){
+        QString query_string = "SELECT temperature,humidity,timestamp from device_readings "
+                               "WHERE serial_number=:serial_number GROUP by time "
+                               "HAVING year=:year and month=:month and day=:day "
+                               "ORDER by timestamp";  //query_string defaults to day option
+
+        query.prepare(query_string);
+        query.bindValue(":serial_number",serial_number);
+        query.bindValue(":year",year);
+        query.bindValue(":month",month);
+        query.bindValue(":day",day);
+
+    } else if (option == "weekly") {
+
+        QString query_string = "";
+    }
+
+
+
+
+
+
+
+    ///////////////////////////////////////////
+
+    QList<Readings*> *list_of_readings = nullptr;
+
+    return list_of_readings;
 }
 
 bool DatabaseManager::initialise()
