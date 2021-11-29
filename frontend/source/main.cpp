@@ -1,16 +1,13 @@
 #include <QtWidgets/QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QQuickStyle>
 #include "statusbar.h"
 #include "controller.h"
 
 
 int main(int argc, char *argv[])
 {
-
-    QQuickStyle::setStyle("Universal");
-
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
 
     qmlRegisterType<Controller>("CT", 1, 0, "Controller");

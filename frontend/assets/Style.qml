@@ -10,8 +10,6 @@ Item {
     property int wWidth
 
 
-
-
     // colors
     readonly property color titleBarBackground: "#3899e2"
     readonly property color titleBarForeground: "white"

@@ -27,9 +27,12 @@
 // WindowManager.LayoutParams
 #define FLAG_TRANSLUCENT_STATUS 0x04000000
 #define FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS 0x80000000
-// View
-#define SYSTEM_UI_FLAG_LIGHT_STATUS_BAR 0x00002000
-#define SYSTEM_UI_FLAG_FULLSCREEN 0x00000400   //UNUSED FOR NOW
+
+#define SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN 0x00000400  //extend view into status bar
+#define SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION 0x00000200 //extend view into navigation bar
+#define SYSTEM_UI_FLAG_LIGHT_STATUS_BAR 0x00002000   //status bar dark color
+#define SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR 0x00000010 //navigation bar dark color
+
 
 static QAndroidJniObject getAndroidWindow()
 {
@@ -66,7 +69,7 @@ void StatusBarPrivate::setColor_sys2(const QColor &color) // navigationBar setCo
     });
 }
 
-void StatusBarPrivate::setTheme_sys(StatusNavigationBar::Theme theme)
+void StatusBarPrivate::setTheme_sys(StatusNavigationBar::Theme /*theme*/)
 {
     if (QtAndroid::androidSdkVersion() < 23)
         return;
@@ -74,11 +77,11 @@ void StatusBarPrivate::setTheme_sys(StatusNavigationBar::Theme theme)
     QtAndroid::runOnAndroidThread([=]() {
         QAndroidJniObject window = getAndroidWindow();
         QAndroidJniObject view = window.callObjectMethod("getDecorView", "()Landroid/view/View;");
+
         int visibility = view.callMethod<int>("getSystemUiVisibility", "()I");
-        if (theme == StatusNavigationBar::Theme::Light)
-            visibility |= SYSTEM_UI_FLAG_LIGHT_STATUS_BAR ;
-        else
-            visibility &= ~SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+
+        visibility = (SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+                      SYSTEM_UI_FLAG_LIGHT_STATUS_BAR  | SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
 
         view.callMethod<void>("setSystemUiVisibility", "(I)V", visibility);
     });

@@ -21,7 +21,7 @@ Item {
 
     Rectangle{
         anchors.fill: parent
-        color: Style.titleBarBackground
+        color: "lightblue"
 
         Image {
             id: splashimage
@@ -32,7 +32,7 @@ Item {
                 right: parent.right
                 margins: Style.margin
             }
-            source: "qrc:/assets/splashImage.png"
+            source: ""
             height: Style.heightForWidth(width,sourceSize)
 
         }
@@ -47,7 +47,7 @@ Item {
                         topMargin: -Style.margin*12
                     }
 
-                    text: "HC-05 Module Controller"
+                    text: "Hello world"
                     font.pixelSize: Style.largeFontSize
                     font.bold: true
                     color: "#fff"
@@ -64,8 +64,6 @@ Item {
     }
 
     Component.onCompleted: {
-        colorBar.statusBarColor=Style.titleBarBackground
-        colorBar.navigationBarColor=Style.titleBarBackground
         splashTimer.start()
     }
 }

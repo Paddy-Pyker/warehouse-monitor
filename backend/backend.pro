@@ -1,5 +1,4 @@
 QT -= gui
-android: QT += androidextras
 QT += network sql
 
 TEMPLATE = lib
