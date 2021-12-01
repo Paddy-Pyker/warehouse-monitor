@@ -1,12 +1,15 @@
 #include <QtWidgets/QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QQuickStyle>
 #include "statusbar.h"
 #include "controller.h"
 
 
+
 int main(int argc, char *argv[])
 {
+    QQuickStyle::setStyle("Material");
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
 

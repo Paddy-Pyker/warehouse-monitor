@@ -2,7 +2,6 @@
     <qresource prefix="/views">
         <file alias="main.qml">views/main.qml</file>
         <file alias="SplashScreen.qml">views/SplashScreen.qml</file>
-        <file alias="qtquickcontrols2.conf">views/qtquickcontrols2.conf</file>
         <file alias="DeviceSelectScreen.qml">views/DeviceSelectScreen.qml</file>
     </qresource>
 </RCC>

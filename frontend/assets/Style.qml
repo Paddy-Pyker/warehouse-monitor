@@ -11,10 +11,8 @@ Item {
 
 
     // colors
-    readonly property color titleBarBackground: "#3899e2"
-    readonly property color titleBarForeground: "white"
-    readonly property color pairedDevicesColor: "slategrey"
-    readonly property color foundDevicesColor: "black"
+    readonly property color colorReal:  "#008A5F"
+    readonly property color colorAccent: "#7CC4AC"
 
 
     // Font sizes
@@ -42,7 +40,7 @@ Item {
     }
 
 
-   // font
+    // font
     FontLoader {
         id: fontAwesomeLoader
         source: "qrc:/assets/fontawesome.ttf"

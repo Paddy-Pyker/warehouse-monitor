@@ -1,4 +1,4 @@
-QT += quick qml charts sql
+QT += quick qml charts sql quickcontrols2
 
 INCLUDEPATH += source \
     $$PWD/../backend
