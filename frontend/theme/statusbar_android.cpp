@@ -80,8 +80,13 @@ void StatusBarPrivate::setTheme_sys(StatusNavigationBar::Theme /*theme*/)
 
         int visibility = view.callMethod<int>("getSystemUiVisibility", "()I");
 
-        visibility = (SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+        if (theme == StatusNavigationBar::Theme::Light)
+
+        visibility |= (SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
                       SYSTEM_UI_FLAG_LIGHT_STATUS_BAR  | SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+
+        else
+            visibility &= ~SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
         view.callMethod<void>("setSystemUiVisibility", "(I)V", visibility);
     });

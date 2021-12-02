@@ -2,10 +2,9 @@
     <qresource prefix="/assets">
         <file alias="qmldir">assets/qmldir</file>
         <file alias="Style.qml">assets/Style.qml</file>
-        <file alias="fontawesome.ttf">assets/fontawesome-webfont.ttf</file>
         <file alias="corsiva.ttf">assets/911Fonts.com_MonotypeCorsiva_Regular_-_911fonts.com_fonts_gyWJ.ttf</file>
         <file alias="splashImage.png">assets/splashImage.png</file>
         <file alias="warehouse_monitor.db">assets/warehouse_monitor.db</file>
-        <file alias="warehouse-pic.jpg">assets/Commodities-Grain-warehouse-804629.jpg</file>
+        <file alias="fontawesome.ttf">assets/Font Awesome 5 Pro-Light-300.otf</file>
     </qresource>
 </RCC>

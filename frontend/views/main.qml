@@ -42,6 +42,7 @@ ApplicationWindow {
             appLoader.visible = true
             splashLoader.visible = false
             splashLoader.setSource("")
+            colorBar.theme="Dark"
             appLoader.item.forceActiveFocus();
         }
     }

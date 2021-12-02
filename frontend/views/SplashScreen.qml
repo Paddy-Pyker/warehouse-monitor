@@ -24,7 +24,7 @@ Item {
     Rectangle{
         id:rec
         anchors.fill: parent
-        color: "#efefef"
+        color: "white"
 
 
         Image {
