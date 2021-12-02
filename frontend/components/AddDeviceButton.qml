@@ -6,6 +6,7 @@ import assets 1.0
 
 Item {
 
+    signal addNewDeviceClick()
     id:root
     anchors.fill: parent
 
@@ -27,8 +28,7 @@ Item {
         font.family: Style.fontAwesome
         height: 70
         width: 70
-        // onClicked: settingsButtonClicked()
-
+        onClicked: addNewDeviceClick()
 
     }
 
