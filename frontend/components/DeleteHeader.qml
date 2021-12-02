@@ -7,7 +7,6 @@ Item {
     signal editButtonClicked()
     signal deleteButtonClicked()
     property bool toggleSubmenu: true
-    property int pheight
 
     id:root
 
@@ -17,18 +16,18 @@ Item {
 
 
     Component.onCompleted: {
-        if(pheight > root.width){ //portrait
-            height = Qt.binding(function(){return 1/10 * pheight})
+        if(Style.wHeight > Style.wWidth){ //portrait
+            height = Qt.binding(function(){return 1/10 * Style.wHeight})
         } else { //landscape
-            height = Qt.binding(function(){return 1/5 * pheight})
+            height = Qt.binding(function(){return 1/5 * Style.wHeight})
         }
     }
 
     onHeightChanged: {
-        if(pheight > root.width){ //portrait
-            height = Qt.binding(function(){return 1/10 * pheight})
+        if(Style.wHeight > Style.wWidth){ //portrait
+            height = Qt.binding(function(){return 1/10 * Style.wHeight})
         } else { //landscape
-            height = Qt.binding(function(){return 1/5 * pheight})
+            height = Qt.binding(function(){return 1/5 * Style.wHeight})
         }
     }
 

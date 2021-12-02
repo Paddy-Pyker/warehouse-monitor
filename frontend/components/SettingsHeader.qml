@@ -1,12 +1,17 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.5
+import QtQuick.Controls.Material 2.3
 import assets 1.0
 
 Item {
 
+    signal settingsButtonClicked()
+    property bool toggleSubmenu: true
+
     id:root
     anchors.left: parent.left
     anchors.right: parent.right
+    visible: toggleSubmenu
 
     Component.onCompleted: {
         if(Style.wHeight > Style.wWidth){ //portrait
@@ -44,6 +49,25 @@ Item {
             horizontalAlignment: Text.AlignHCenter
 
         }
+
+                Button{
+                    anchors{
+                        bottom: parent.bottom
+                        right: parent.right
+                        rightMargin: Style.margin
+                    }
+                    flat: true
+                    highlighted: true
+                    Material.accent: "white"
+                    font.pixelSize: Style.smallFontSize
+                    text: "\uf1de"
+                    font.family: Style.fontAwesome
+                    onClicked: settingsButtonClicked()
+
+
+                }
+
+
 
     }
 }

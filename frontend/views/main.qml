@@ -9,6 +9,7 @@ ApplicationWindow {
     title: qsTr("Warehouse Monitor")
     width: 720 * .7
     height: 1240 * .7
+    color: "white"
 
 
 

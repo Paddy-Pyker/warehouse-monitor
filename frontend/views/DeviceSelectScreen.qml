@@ -54,18 +54,27 @@ Item {
 
 
 
-    //// main visuals section
+    //// headers section
     Custom.Header{
         id:header
-        pheight: root.height
     }
 
-    Custom.Subheader{
-        id:subheader
-        pheight: root.height
+    Custom.DeleteHeader{
+        id:settingsheader
         toggleSubmenu: false
-
-
     }
+
+    Custom.SettingsHeader{
+        id:deleteheader
+        toggleSubmenu: false
+    }
+
+
+    Custom.ModelTitleBar{
+        id:modelTitleBar
+        anchors.top: header.bottom
+    }
+
+
 
 }

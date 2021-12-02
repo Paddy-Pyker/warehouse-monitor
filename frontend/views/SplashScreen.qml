@@ -79,7 +79,7 @@ Item {
     }
 
     onHeightChanged: {
-        if(root.height > root.width){ //portrait
+        if(Style.wHeight > Style.wWidth){ //portrait
             splashimage.anchors.left = rec.left
             splashimage.anchors.right = rec.right
             splashimage.height = Style.heightForWidth(splashimage.width,splashimage.sourceSize)

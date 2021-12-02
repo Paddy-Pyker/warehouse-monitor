@@ -2,6 +2,8 @@
     <qresource prefix="/components">
         <file alias="qmldir">components/qmldir</file>
         <file alias="Header.qml">components/Header.qml</file>
-        <file alias="Subheader.qml">components/Subheader.qml</file>
+        <file alias="DeleteHeader.qml">components/DeleteHeader.qml</file>
+        <file alias="SettingsHeader.qml">components/SettingsHeader.qml</file>
+        <file alias="ModelTitleBar.qml">components/ModelTitleBar.qml</file>
     </qresource>
 </RCC>
