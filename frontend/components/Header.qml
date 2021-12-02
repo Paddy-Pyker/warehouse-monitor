@@ -52,7 +52,6 @@ Item {
             anchors{
                 bottom: parent.bottom
                 right: parent.right
-                rightMargin: Style.margin
             }
             flat: true
             highlighted: true
@@ -63,9 +62,11 @@ Item {
             onClicked: menu.open()
 
             Menu {
+
                 id: menu
                 topPadding: 0
                 bottomPadding: 0
+                x:-menu.width * .7
 
 
                 MenuItem {
