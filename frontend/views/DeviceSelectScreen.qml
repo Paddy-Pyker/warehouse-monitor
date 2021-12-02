@@ -54,7 +54,7 @@ Item {
 
 
 
-    //// headers section
+    //// view start here
     Custom.Header{
         id:header
     }
@@ -74,6 +74,12 @@ Item {
         id:modelTitleBar
         anchors.top: header.bottom
     }
+
+    Custom.AddDeviceButton{
+        id:addDeviceBtn
+    }
+
+
 
 
 

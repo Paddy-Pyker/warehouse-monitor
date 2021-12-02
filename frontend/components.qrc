@@ -5,5 +5,6 @@
         <file alias="DeleteHeader.qml">components/DeleteHeader.qml</file>
         <file alias="SettingsHeader.qml">components/SettingsHeader.qml</file>
         <file alias="ModelTitleBar.qml">components/ModelTitleBar.qml</file>
+        <file alias="AddDeviceButton.qml">components/AddDeviceButton.qml</file>
     </qresource>
 </RCC>
