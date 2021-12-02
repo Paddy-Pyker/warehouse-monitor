@@ -14,11 +14,13 @@ ApplicationWindow {
 
 
     Component.onCompleted: {
+        Style.wWidth = Qt.binding(function() {return width})
+        Style.wHeight = Qt.binding(function() {return height})
+
         colorBar.theme="Light"
         colorBar.statusBarColor=Qt.rgba(0,0,0,0)
         colorBar.navigationBarColor=Qt.rgba(0,0,0,0)
-        Style.wWidth = Qt.binding(function() {return width})
-        Style.wHeight = Qt.binding(function() {return height})
+
     }
 
     Loader {

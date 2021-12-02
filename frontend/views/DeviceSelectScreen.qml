@@ -18,9 +18,9 @@ Item {
 
     onHeightChanged: {
         if(root.height > root.width){ //portrait
-            exit.anchors.bottomMargin = 50
+            exit.anchors.bottomMargin = Qt.binding(function(){return 50})
         } else { //landscape
-            exit.anchors.bottomMargin = 20
+            exit.anchors.bottomMargin = Qt.binding(function(){return 20})
         }
     }
 

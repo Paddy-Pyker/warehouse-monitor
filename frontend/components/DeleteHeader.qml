@@ -17,7 +17,7 @@ Item {
 
     Component.onCompleted: {
         if(Style.wHeight > Style.wWidth){ //portrait
-            height = Qt.binding(function(){return 1/10 * Style.wHeight})
+            height = Qt.binding(function(){return 1/9 * Style.wHeight})
         } else { //landscape
             height = Qt.binding(function(){return 1/5 * Style.wHeight})
         }
@@ -25,7 +25,7 @@ Item {
 
     onHeightChanged: {
         if(Style.wHeight > Style.wWidth){ //portrait
-            height = Qt.binding(function(){return 1/10 * Style.wHeight})
+            height = Qt.binding(function(){return 1/9 * Style.wHeight})
         } else { //landscape
             height = Qt.binding(function(){return 1/5 * Style.wHeight})
         }
