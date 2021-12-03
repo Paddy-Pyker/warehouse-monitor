@@ -69,7 +69,7 @@ void StatusBarPrivate::setColor_sys2(const QColor &color) // navigationBar setCo
     });
 }
 
-void StatusBarPrivate::setTheme_sys(StatusNavigationBar::Theme /*theme*/)
+void StatusBarPrivate::setTheme_sys(StatusNavigationBar::Theme theme)
 {
     if (QtAndroid::androidSdkVersion() < 23)
         return;
@@ -82,8 +82,14 @@ void StatusBarPrivate::setTheme_sys(StatusNavigationBar::Theme /*theme*/)
 
         if (theme == StatusNavigationBar::Theme::Light)
 
-        visibility |= (SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-                      SYSTEM_UI_FLAG_LIGHT_STATUS_BAR  | SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+            visibility |= (SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+                           SYSTEM_UI_FLAG_LIGHT_STATUS_BAR  | SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+
+        else if (theme == StatusNavigationBar::Theme::Custom)
+            visibility &= ~SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+
+        else if(theme == StatusNavigationBar::Theme::Custom2)
+            visibility |= (SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
 
         else
             visibility &= ~SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;

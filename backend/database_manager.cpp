@@ -164,27 +164,22 @@ QVariantList DatabaseManager::get_devices_from_database()
 {
 
 
-    QSqlQuery query;
-    QString query_string = "SELECT name,serial_number,last_reading_timestamp FROM device_name ORDER BY created_at DESC";
-    query.prepare(query_string);
+    QSqlQuery query("SELECT name,serial_number,last_reading_timestamp FROM device_name ORDER BY created_at DESC");
 
-    query.exec();
 
     QVariantList devices;
 
 
-    // while (query.next()) {
+    while(query.next()) {
 
 
-    //        Device* device = new Device(this,query.value("name").toString(),
-    //                                    query.value("serial_number").toString(),
-    //                                    query.value("last_reading_timestamp").toString());
-    Device* device = new Device(this,"hello","world","okay");
+        Device* device = new Device(this,query.value("name").toString(),
+                                    query.value("serial_number").toString(),
+                                    query.value("last_reading_timestamp").toString());
 
-    devices.append(QVariant::fromValue(device));
+        devices.append(QVariant::fromValue(device));
 
-    devices.append(QVariant::fromValue(new Device(this,"mango","kilo","mil")));
-    //   }
+    }
 
     return devices;
 

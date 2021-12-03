@@ -45,7 +45,7 @@ public:
     static void setStatusBarColor(const QColor &color);
     static void setNavigationBarColor(const QColor &color);
 
-    enum Theme { Light, Dark };
+    enum Theme { Light, Dark, Custom, Custom2 };
     Q_ENUM(Theme)
 
     static Theme theme();

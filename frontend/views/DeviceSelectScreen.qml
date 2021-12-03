@@ -21,11 +21,13 @@ Item {
             exit.anchors.bottomMargin = Qt.binding(function(){return 50})
             devices.anchors.leftMargin = Style.margin
             devices.anchors.rightMargin = Style.margin
+            colorBar.theme="Custom2"
 
         } else { //landscape
             exit.anchors.bottomMargin = Qt.binding(function(){return 20})
             devices.anchors.leftMargin = Style.margin *7
             devices.anchors.rightMargin = Style.margin *7
+            colorBar.theme="Custom"
         }
     }
 
@@ -97,6 +99,7 @@ Item {
             bottom: parent.bottom
 
         }
+        model : controller.get_devices_from_database
         clip: true
         delegate: Custom.DevicesDelegate{
             device: modelData
@@ -109,7 +112,5 @@ Item {
 
 
     }
-
-    Component.onCompleted: devices.model = controller.get_devices_from_database
 
 }
