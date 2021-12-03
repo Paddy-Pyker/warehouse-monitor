@@ -1,6 +1,7 @@
 !contains(QT.network_private.enabled_features, openssl-linked) {
     CONFIG(release, debug|release): SSL_PATH = $$PWD
-                            else: SSL_PATH = $$PWD/no-asm
+                            #else: SSL_PATH = $$PWD/no-asm
+                            else: SSL_PATH = $$PWD
 
     if (!versionAtLeast(QT_VERSION, 5.12.4)) {
         contains(ANDROID_TARGET_ARCH, armeabi-v7a) {
