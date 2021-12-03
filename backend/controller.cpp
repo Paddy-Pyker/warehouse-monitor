@@ -17,14 +17,18 @@ Controller::Controller(QObject *parent) : QObject(parent)
     connect(network,&NetworkManager::loading_data_from_server,this,&Controller::Loading_data_from_server);
 
 
-    network->fetch_http_data("1","0"); /// for testing purposes
+    // network->fetch_http_data("1","0"); /// for testing purposes
 }
 
-QQmlListProperty<Readings> Controller::load_readings_from_database()
+QVariantList Controller::load_readings_from_database()
 {
-    QList<Readings*> a = database->load_readings_from_database(device_serialNUmber,selectedOption,selectedDate);
+    return database->load_readings_from_database(device_serialNUmber,selectedOption,selectedDate);
+}
 
-    return QQmlListProperty<Readings>(this,&a);
+QVariantList Controller::get_devices_from_database()
+{
+
+    return database->get_devices_from_database();
 }
 
 const QString &Controller::get_selectedOption()

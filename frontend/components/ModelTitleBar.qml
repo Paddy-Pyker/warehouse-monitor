@@ -19,7 +19,6 @@ Item {
         text: qsTr("Devices")
         horizontalAlignment: Text.AlignHCenter
         font.pixelSize: Style.mediumFontSize
-        font.family: Style.fontAwesome
         color: "dimgray"
 
     }

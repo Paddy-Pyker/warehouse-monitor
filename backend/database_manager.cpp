@@ -69,7 +69,7 @@ void DatabaseManager::insert_device_readings(const QString& serial_number,const 
 
 }
 
-QList<Readings*> DatabaseManager::load_readings_from_database(const QString& _serial_number,const QString& _selectedOption,const QString& _selectedDate)
+QVariantList DatabaseManager::load_readings_from_database(const QString& _serial_number,const QString& _selectedOption,const QString& _selectedDate)
 {
 
     QDateTime time = QDateTime::fromMSecsSinceEpoch(_selectedDate.toULongLong(),Qt::UTC);  //ensure selectedDate is in ms
@@ -144,7 +144,7 @@ QList<Readings*> DatabaseManager::load_readings_from_database(const QString& _se
 
 
     query.exec();
-    QList<Readings*> list_of_readings;
+    QVariantList list_of_readings;
 
     while (query.next()) {
 
@@ -153,13 +153,41 @@ QList<Readings*> DatabaseManager::load_readings_from_database(const QString& _se
                                            query.value("temperature").toDouble());
 
 
-        list_of_readings.push_front(readings);
-
+        list_of_readings.push_front(QVariant::fromValue(readings));
     }
 
 
-
     return list_of_readings;
+}
+
+QVariantList DatabaseManager::get_devices_from_database()
+{
+
+
+    QSqlQuery query;
+    QString query_string = "SELECT name,serial_number,last_reading_timestamp FROM device_name ORDER BY created_at DESC";
+    query.prepare(query_string);
+
+    query.exec();
+
+    QVariantList devices;
+
+
+    // while (query.next()) {
+
+
+    //        Device* device = new Device(this,query.value("name").toString(),
+    //                                    query.value("serial_number").toString(),
+    //                                    query.value("last_reading_timestamp").toString());
+    Device* device = new Device(this,"hello","world","okay");
+
+    devices.append(QVariant::fromValue(device));
+
+    devices.append(QVariant::fromValue(new Device(this,"mango","kilo","mil")));
+    //   }
+
+    return devices;
+
 }
 
 bool DatabaseManager::initialise()

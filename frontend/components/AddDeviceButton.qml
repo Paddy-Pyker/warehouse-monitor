@@ -25,7 +25,7 @@ Item {
         Material.elevation: 6
         font.pixelSize: Style.hugeFontSize
         text: "\uf067"
-        font.family: Style.fontAwesome
+        font.family: Style.fontAwesomeLight
         height: 70
         width: 70
         onClicked: addNewDeviceClick()

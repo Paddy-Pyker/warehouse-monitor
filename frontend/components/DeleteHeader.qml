@@ -66,7 +66,7 @@ Item {
             Material.accent: "white"
             font.pixelSize: Style.smallFontSize
             text: "\uf2ed"
-            font.family: Style.fontAwesome
+            font.family: Style.fontAwesomeLight
             onClicked: deleteButtonClicked()
 
 
@@ -85,7 +85,7 @@ Item {
             Material.accent: "white"
             font.pixelSize: Style.smallFontSize
             text: "\uf044"
-            font.family: Style.fontAwesome
+            font.family: Style.fontAwesomeLight
             onClicked: editButtonClicked()
 
 

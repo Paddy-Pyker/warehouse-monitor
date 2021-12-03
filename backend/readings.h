@@ -19,7 +19,6 @@ public:
     const double& get_humidity();
     const double& get_temperature();
 
-
 private:
     QString Timestamp;
     double Humidity;

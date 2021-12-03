@@ -3,6 +3,7 @@ import QtQuick 2.9
 
 Item {
     property alias fontAwesome: fontAwesomeLoader.name
+    property alias fontAwesomeLight: fontAwesomeLightLoader.name
     property alias corsiva: corsivaLoader.name
 
 
@@ -40,14 +41,21 @@ Item {
     }
 
 
-    // font
+    // fonts
     FontLoader {
         id: fontAwesomeLoader
-        source: "qrc:/assets/fontawesome.ttf"
+        source: "qrc:/assets/fontawesome-solid.otf"
+    }
+
+    FontLoader{
+        id:fontAwesomeLightLoader
+        source: "qrc:/assets/fontawesome-light.otf"
     }
 
     FontLoader {
         id: corsivaLoader
         source: "qrc:/assets/corsiva.ttf"
     }
+
+
 }

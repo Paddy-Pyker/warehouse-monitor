@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.3
 import assets 1.0
+import QtQuick.Controls.Styles 1.4
 
 Item {
 
@@ -60,7 +61,7 @@ Item {
             Material.accent: "white"
             font.pixelSize: Style.smallFontSize
             text: "\uf39c"
-            font.family: Style.fontAwesome
+            font.family: Style.fontAwesomeLight
             onClicked: menu.open()
 
             Menu {
@@ -78,7 +79,6 @@ Item {
                         highlighted = false
                         addNewDevice()
                     }
-
 
                 }
 

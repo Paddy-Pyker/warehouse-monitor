@@ -4,6 +4,8 @@
 #include <QQuickStyle>
 #include "statusbar.h"
 #include "controller.h"
+#include "device.h"
+#include "readings.h"
 
 
 
@@ -13,8 +15,9 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
 
-    qmlRegisterType<Controller>("CT", 1, 0, "Controller");
-    qmlRegisterType<StatusNavigationBar>("StatusNavigationBar", 0, 1, "StatusNavigationBar");
+    qmlRegisterType<Controller>("Controller", 1, 0, "Controller");
+    qmlRegisterType<Device>("Device", 1, 0, "Device");
+    qmlRegisterType<Readings>("Readings", 1, 0, "Readings");
 
     StatusNavigationBar color;
     Controller* controller = new Controller(&app);

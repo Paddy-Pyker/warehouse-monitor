@@ -19,8 +19,13 @@ Item {
     onHeightChanged: {
         if(root.height > root.width){ //portrait
             exit.anchors.bottomMargin = Qt.binding(function(){return 50})
+            devices.anchors.leftMargin = Style.margin
+            devices.anchors.rightMargin = Style.margin
+
         } else { //landscape
             exit.anchors.bottomMargin = Qt.binding(function(){return 20})
+            devices.anchors.leftMargin = Style.margin *7
+            devices.anchors.rightMargin = Style.margin *7
         }
     }
 
@@ -77,10 +82,34 @@ Item {
 
     Custom.AddDeviceButton{
         id:addDeviceBtn
+        z:5
     }
 
 
+    ListView{
+        id:devices
+        anchors{
+            top: modelTitleBar.bottom
+            margins: Style.margin
+            topMargin: 40
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+
+        }
+        clip: true
+        delegate: Custom.DevicesDelegate{
+            device: modelData
+            onSelectedDevice: {
+                //                    connectingDialog.source = "qrc:/components/ConnectingDialog.qml"
+                //                    connectingDialog.item.description = id
+                //                    bluetoothManager.device_selected(id,mac)
+            }
+        }
 
 
+    }
+
+    Component.onCompleted: devices.model = controller.get_devices_from_database
 
 }

@@ -3,9 +3,10 @@
 
 #include "backend_global.h"
 #include <QObject>
-#include <QtQml/QQmlListProperty>
 #include "database_manager.h"
 #include "readings.h"
+#include "device.h"
+#include <QVariantList>
 
 
 class NetworkManager;
@@ -13,14 +14,16 @@ class NetworkManager;
 class BACKEND_EXPORT Controller : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QQmlListProperty<Readings> load_readings_from_database READ load_readings_from_database)
+    Q_PROPERTY(QVariantList load_readings_from_database READ load_readings_from_database CONSTANT)
+    Q_PROPERTY(QVariantList get_devices_from_database READ get_devices_from_database CONSTANT)
     Q_PROPERTY(QString selectedOption READ get_selectedOption)
     Q_PROPERTY(QString selectedDate READ get_selectedDate)
 
 public:
     explicit Controller(QObject *parent = nullptr);
 
-    QQmlListProperty<Readings> load_readings_from_database(); //if rebounce emitted, call this
+    QVariantList load_readings_from_database(); //if rebounce emitted, call this
+    QVariantList get_devices_from_database();
     const QString& get_selectedOption();
     const QString& get_selectedDate();
 

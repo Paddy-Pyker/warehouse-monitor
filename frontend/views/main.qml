@@ -41,7 +41,8 @@ ApplicationWindow {
 
     Connections {
         target: splashLoader.item
-        onReadyToGo: {
+
+        function onReadyToGo() {
             appLoader.visible = true
             splashLoader.visible = false
             splashLoader.setSource("")
