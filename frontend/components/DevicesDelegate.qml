@@ -2,6 +2,7 @@ import QtQuick 2.9
 import assets 1.0
 import Device 1.0
 
+
 Rectangle {
     id:root
     anchors{
@@ -16,7 +17,12 @@ Rectangle {
     radius: 10
 
     property Device device
+    property string _STATE
+
+    state: _STATE
     signal selectedDevice(string serial_number,string last_reading_timestamp)
+    signal pressedAndHeld(string serialnumber)
+
 
 
 
@@ -58,12 +64,18 @@ Rectangle {
 
     MouseArea{
         anchors.fill: parent
-        onPressed: parent.state = "pressed"
-        onCanceled: parent.state = ""
-        onReleased: parent.state = ""
-        onClicked: selectedDevice(serialnumber.text,devices.last_reading_timestamp)
-
+        onPressed:{ _STATE = "pressed"; timer.start()}
+        onCanceled: _STATE = ""
+        pressAndHoldInterval: 350
+        onPressAndHold: {console.log("held the button"); pressedAndHeld(device.serialNumber)}
     }
+
+    Timer{
+        id:timer
+        interval: 350
+        onTriggered: {_STATE=""; selectedDevice(serialnumber.text,devices.last_reading_timestamp);}
+    }
+
 
 
     states: [
