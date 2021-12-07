@@ -63,6 +63,11 @@ void Controller::check_for_device_availability(const QString &serial_number)
     network->check_for_device_availability(serial_number);
 }
 
+void Controller::addNewDevice(const QString &name, const QString &serialNumber)
+{
+    database->addNewDevice(name,serialNumber);
+}
+
 
 
 

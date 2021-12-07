@@ -106,6 +106,12 @@ Item {
 
     }
 
+    Connections{
+        target: controller
+        function onModelChanged(){
+            devices.model = controller.get_devices_from_database
+        }
+    }
 
     ListView{
         id:devices

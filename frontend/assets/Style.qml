@@ -6,7 +6,6 @@ Item {
     property alias fontAwesomeLight: fontAwesomeLightLoader.name
     property alias corsiva: corsivaLoader.name
 
-
     property int wHeight
     property int wWidth
 

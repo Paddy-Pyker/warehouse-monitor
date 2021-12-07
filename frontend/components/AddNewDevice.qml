@@ -8,7 +8,6 @@ Item {
     id:root
     signal cancelPropagated()
     property string serialNumber
-    property string device_name
     Keys.onBackPressed: {
         cancelPropagated()
     }
@@ -26,7 +25,6 @@ Item {
             switch (responseCode){
 
             case 0:
-                //                console.log("device already exist")
                 already_exist_dialog.visible = true
                 break
 
@@ -278,7 +276,8 @@ Item {
 
 
                 onClicked:{
-                    console.log("device added successfully")
+                    controller.addNewDevice(nameValue.text,serialNumber)
+                    controller.modelChanged()
                     cancelPropagated()
                 }
             }
