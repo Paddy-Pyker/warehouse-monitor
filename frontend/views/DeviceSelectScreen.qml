@@ -67,12 +67,19 @@ Item {
     }
 
     Custom.DeleteHeader{
-        id:settingsheader
+        id:deleteheader
         toggleSubmenu: false
+        onCancelSelectDevice: {
+            root.focus = true
+            toggleSubmenu = false
+            devices.model = controller.get_devices_from_database
+            Style.limit_to_only_one_device_selection = false
+
+        }
     }
 
     Custom.SettingsHeader{
-        id:deleteheader
+        id:settingsheader
         toggleSubmenu: false
     }
 
@@ -108,6 +115,11 @@ Item {
                 //                    connectingDialog.item.description = id
                 //                    bluetoothManager.device_selected(id,mac)
             }
+            onPressedAndHeld: {
+                deleteheader.toggleSubmenu = true
+                deleteheader.focus = true
+            }
+
         }
 
 

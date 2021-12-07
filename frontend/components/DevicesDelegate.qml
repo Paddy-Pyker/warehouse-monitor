@@ -17,9 +17,7 @@ Rectangle {
     radius: 10
 
     property Device device
-    property string _STATE
 
-    state: _STATE
     signal selectedDevice(string serial_number,string last_reading_timestamp)
     signal pressedAndHeld(string serialnumber)
 
@@ -61,19 +59,36 @@ Rectangle {
     }
 
 
+    property bool fix_state_on_hold
 
     MouseArea{
         anchors.fill: parent
-        onPressed:{ _STATE = "pressed"; timer.start()}
-        onCanceled: _STATE = ""
-        pressAndHoldInterval: 350
-        onPressAndHold: {console.log("held the button"); pressedAndHeld(device.serialNumber)}
+        onPressed:{
+            root.state = "pressed";
+            timer.start()
+        }
+        onCanceled: root.state = ""
+        pressAndHoldInterval: 320
+        onPressAndHold: {
+            if(!Style.limit_to_only_one_device_selection){
+                console.log("held the button");
+                fix_state_on_hold  = true
+                pressedAndHeld(device.serialNumber)
+                root.state = "pressed"
+                Style.limit_to_only_one_device_selection = true
+            }
+        }
     }
 
     Timer{
         id:timer
         interval: 350
-        onTriggered: {_STATE=""; selectedDevice(serialnumber.text,devices.last_reading_timestamp);}
+        onTriggered: {
+            if(!fix_state_on_hold){
+                root.state="";
+                selectedDevice(serialnumber.text,devices.last_reading_timestamp)
+            }
+        }
     }
 
 

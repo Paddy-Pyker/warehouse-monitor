@@ -10,6 +10,8 @@ Item {
     property int wHeight
     property int wWidth
 
+    property bool limit_to_only_one_device_selection : false
+
 
     // colors
     readonly property color colorReal:  "#008A5F"

@@ -6,10 +6,14 @@ import assets 1.0
 Item {
     signal editButtonClicked()
     signal deleteButtonClicked()
+    signal cancelSelectDevice()
     property bool toggleSubmenu: true
 
     id:root
 
+    Keys.onBackPressed: {
+        cancelSelectDevice()
+    }
     anchors.left: parent.left
     anchors.right: parent.right
     visible: toggleSubmenu
