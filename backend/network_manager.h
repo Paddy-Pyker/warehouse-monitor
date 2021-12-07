@@ -16,6 +16,7 @@ public:
     explicit NetworkManager(QObject *parent, DatabaseManager* _database);
 
     void fetch_http_data(const QString &device_id,const QString& last_timestamp);
+    void check_for_device_availability(const QString& serial_number);
 
 
 signals:
@@ -24,9 +25,14 @@ signals:
     void loading_error();
     void load_data_from_database(const QString& serial_number);
 
+    void device_AVAILABILITY_IS_READY(int response);
+
 private slots:
     void http_response_is_ready();
     void internet_connection_failed();
+
+    void device_availability_is_ready();
+    void device_availability_error_occurred();
 
 
 private:

@@ -7,5 +7,6 @@
         <file alias="ModelTitleBar.qml">components/ModelTitleBar.qml</file>
         <file alias="AddDeviceButton.qml">components/AddDeviceButton.qml</file>
         <file alias="DevicesDelegate.qml">components/DevicesDelegate.qml</file>
+        <file alias="AddNewDevice.qml">components/AddNewDevice.qml</file>
     </qresource>
 </RCC>

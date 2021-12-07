@@ -64,6 +64,11 @@ Item {
     //// view start here
     Custom.Header{
         id:header
+        onAddNewDevice: {
+
+            addNewDevice.setSource("qrc:/components/AddNewDevice.qml")
+            addNewDevice.item.forceActiveFocus()
+        }
     }
 
     Custom.DeleteHeader{
@@ -91,7 +96,14 @@ Item {
 
     Custom.AddDeviceButton{
         id:addDeviceBtn
+        visible: !deleteheader.visible
         z:5
+        onAddNewDeviceClick: {
+
+            addNewDevice.setSource("qrc:/components/AddNewDevice.qml")
+            addNewDevice.item.forceActiveFocus()
+        }
+
     }
 
 
@@ -123,6 +135,19 @@ Item {
         }
 
 
+    }
+
+    Loader{
+        id:addNewDevice
+        anchors.fill: parent
+        z:6
+    }
+
+    Connections{
+        target: addNewDevice.item
+        function onCancelPropagated(){
+            addNewDevice.setSource("")
+        }
     }
 
 }

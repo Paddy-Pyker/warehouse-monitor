@@ -15,6 +15,7 @@ Controller::Controller(QObject *parent) : QObject(parent)
     connect(network,&NetworkManager::loading_error,this,&Controller::Loading_error);
     connect(network,&NetworkManager::loading_completed_succesfully,this,&Controller::Loading_completed_succesfully);
     connect(network,&NetworkManager::loading_data_from_server,this,&Controller::Loading_data_from_server);
+    connect(network,&NetworkManager::device_AVAILABILITY_IS_READY,this,&Controller::device_availability_is_ready);
 
 
     // network->fetch_http_data("1","0"); /// for testing purposes
@@ -55,6 +56,11 @@ void Controller::set_selectedOptions(const QString &option, const QString &date)
 void Controller::fetch_http_data(const QString &device_id, const QString &last_timestamp)
 {
     network->fetch_http_data(device_id,last_timestamp);
+}
+
+void Controller::check_for_device_availability(const QString &serial_number)
+{
+    network->check_for_device_availability(serial_number);
 }
 
 

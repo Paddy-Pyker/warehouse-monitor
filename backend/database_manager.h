@@ -15,6 +15,7 @@ public:
     void set_device_latest_timestamp(const QString& serial_number,const QString& timestamp);
     void insert_device_readings(const QString& _serial_number,const QString& timestamp,const double& temperature,
                                 const double& humidity,const double& moisture_content=0.0);
+    int device_availability(const QString& device_serialnumber);
 
     QVariantList load_readings_from_database(const QString& _serial_number, const QString& _selectedOption, const QString& _selectedDate);
     QVariantList get_devices_from_database();

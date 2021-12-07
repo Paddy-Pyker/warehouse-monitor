@@ -44,6 +44,19 @@ void NetworkManager::fetch_http_data(const QString &device_id,const QString& las
 
 }
 
+void NetworkManager::check_for_device_availability(const QString &serial_number)
+{
+    device_serialnumber = serial_number;
+    QString Url="https://warehouse-monitor-app.herokuapp.com/auth/device/" + serial_number;
+    request.setUrl(QUrl(Url));
+
+    response = manager->get(request);
+
+    connect(response, &QIODevice::readyRead, this, &NetworkManager::device_availability_is_ready);
+    connect(response, &QNetworkReply::errorOccurred,this, &NetworkManager::device_availability_error_occurred);
+
+}
+
 void NetworkManager::internet_connection_failed()
 {
     qDebug()<<"failed to connect";
@@ -55,6 +68,34 @@ void NetworkManager::internet_connection_failed()
     //////load data from database
     emit load_data_from_database(device_serialnumber);
 
+}
+
+void NetworkManager::device_availability_is_ready()
+{
+
+    disconnect(response, &QIODevice::readyRead, this, &NetworkManager::device_availability_is_ready);
+    disconnect(response, &QNetworkReply::errorOccurred,this, &NetworkManager::device_availability_error_occurred);
+
+    int statusCode = response->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    response->deleteLater();
+
+    if(statusCode == 200)
+        statusCode = database->device_availability(device_serialnumber);
+
+
+    emit device_AVAILABILITY_IS_READY(statusCode);
+
+}
+
+void NetworkManager::device_availability_error_occurred()
+{
+
+    disconnect(response, &QIODevice::readyRead, this, &NetworkManager::device_availability_is_ready);
+    disconnect(response, &QNetworkReply::errorOccurred,this, &NetworkManager::device_availability_error_occurred);
+    response->deleteLater();
+
+   // qDebug()<<-1;
+    emit device_AVAILABILITY_IS_READY(-1);
 }
 
 

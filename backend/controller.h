@@ -33,10 +33,13 @@ signals:
     void Loading_data_from_server();//listen to this signal to show the progress bar
     void Loading_completed_succesfully();//listen to this signal to disable progress bar
     void Loading_error();//listen to this signal to prompt of fetch error
+    void device_availability_is_ready(int responseCode);
 
 public slots:
     void set_selectedOptions(const QString& option,const QString& date);
     void fetch_http_data(const QString& device_id = "", const QString& last_timestamp="0");  //initial request for data
+    void check_for_device_availability(const QString& serial_number);
+
 
 
 

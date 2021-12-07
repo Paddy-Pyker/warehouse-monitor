@@ -69,6 +69,20 @@ void DatabaseManager::insert_device_readings(const QString& serial_number,const 
 
 }
 
+int DatabaseManager::device_availability(const QString &device_serialnumber)
+{
+    QSqlQuery query;
+    query.prepare("SELECT serial_number FROM device_name WHERE serial_number=:serial_number");
+    query.bindValue(":serial_number",device_serialnumber);
+    query.exec();
+    if (query.next())  return 0;
+
+    return 201;
+
+
+
+}
+
 QVariantList DatabaseManager::load_readings_from_database(const QString& _serial_number,const QString& _selectedOption,const QString& _selectedDate)
 {
 
@@ -208,9 +222,6 @@ bool DatabaseManager::initialise()
 
     return db.open();
 }
-
-
-
 
 
 bool DatabaseManager::create_tables()
