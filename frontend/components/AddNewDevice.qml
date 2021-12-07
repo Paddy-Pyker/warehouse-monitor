@@ -39,6 +39,29 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        if(Style.wHeight > Style.wWidth){ //portrait
+            serial_dialog.height = Qt.binding(function(){return (1/5 * Style.wHeight) < 160 ? 160 : (1/5 * Style.wHeight) })
+            serial_dialog.width = Qt.binding(function(){return (0.8* Style.wWidth)})
+        } else { //landscape
+            serial_dialog.height = Qt.binding(function(){return (1/2.5 * Style.wHeight) < 137 ? 137 : (1/2.5 * Style.wHeight)})
+            serial_dialog.width = Qt.binding(function(){return (0.4 * Style.wWidth)})
+        }
+
+
+    }
+
+    onHeightChanged: {
+        if(Style.wHeight > Style.wWidth){ //portrait
+            serial_dialog.height = Qt.binding(function(){return (1/5 * Style.wHeight) < 160 ? 160 : (1/5 * Style.wHeight) })
+            serial_dialog.width = Qt.binding(function(){return (0.8* Style.wWidth)})
+        } else { //landscape
+            serial_dialog.height = Qt.binding(function(){return (1/2.5 * Style.wHeight) < 137 ? 137 : (1/2.5 * Style.wHeight)})
+            serial_dialog.width = Qt.binding(function(){return (0.4 * Style.wWidth)})
+        }
+    }
+
+
     Rectangle{
         anchors.fill: parent
         color: Qt.rgba(0,0,0,0.8)
@@ -47,8 +70,6 @@ Item {
         Rectangle{ //serial dialog
             id:serial_dialog
             anchors.centerIn: parent
-            width: 0.8*parent.width
-            height: 1/5 * parent.height
             radius: 5
 
             layer.enabled: true
@@ -133,8 +154,8 @@ Item {
         Rectangle{  //error dialog
             id:serial_dialog_error
             anchors.centerIn: parent
-            width: 0.8*parent.width
-            height: 1/5 * parent.height
+            width: serial_dialog.width
+            height: serial_dialog.height
             radius: 5
             visible: false
 
@@ -182,8 +203,8 @@ Item {
         Rectangle{  //already exist dialog
             id:already_exist_dialog
             anchors.centerIn: parent
-            width: 0.8*parent.width
-            height: 1/5 * parent.height
+            width: serial_dialog.width
+            height: serial_dialog.height
             radius: 5
             visible: false
 
@@ -231,8 +252,8 @@ Item {
         Rectangle{ //name dialog
             id:name_dialog
             anchors.centerIn: parent
-            width: 0.8*parent.width
-            height: 1/5 * parent.height
+            width: serial_dialog.width
+            height: serial_dialog.height
             radius: 5
             visible: false
 
