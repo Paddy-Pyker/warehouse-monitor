@@ -64,7 +64,7 @@ Item {
 
     Rectangle{
         anchors.fill: parent
-        color: Qt.rgba(0,0,0,0.7)
+        color: Qt.rgba(0,0,0,0.55)
         z:1
 
         Rectangle{ //serial dialog
@@ -297,17 +297,23 @@ Item {
                 font.bold: true
 
 
-                onClicked:{
-                    if(nameValue.text){
-                        controller.addNewDevice(nameValue.text,serialNumber)
-                        controller.modelChanged()
-                        cancelPropagated()
-                    }
-                }
+                onClicked:conf.start()
             }
 
 
 
+        }
+
+        Timer{
+            id:conf
+            interval: 200
+            onTriggered: {
+                if(nameValue.text){
+                    controller.addNewDevice(nameValue.text,serialNumber)
+                    controller.modelChanged()
+                    cancelPropagated()
+                }
+            }
         }
 
     }

@@ -8,5 +8,6 @@
         <file alias="AddDeviceButton.qml">components/AddDeviceButton.qml</file>
         <file alias="DevicesDelegate.qml">components/DevicesDelegate.qml</file>
         <file alias="AddNewDevice.qml">components/AddNewDevice.qml</file>
+        <file alias="DeleteDeviceDialog.qml">components/DeleteDeviceDialog.qml</file>
     </qresource>
 </RCC>

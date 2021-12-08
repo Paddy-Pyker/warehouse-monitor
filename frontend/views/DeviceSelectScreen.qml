@@ -83,10 +83,8 @@ Item {
         }
 
         onDeleteButtonClicked:{
-            controller.deleteDevice(Style.selectedSerialNumber)
-            controller.modelChanged()
-            deleteheader.toggleSubmenu = false
-            Style.limit_to_only_one_device_selection = false
+            deleteDeviceDialog.setSource("qrc:/components/DeleteDeviceDialog.qml")
+            deleteDeviceDialog.item.forceActiveFocus()
         }
     }
 
@@ -161,6 +159,31 @@ Item {
         target: addNewDevice.item
         function onCancelPropagated(){
             addNewDevice.setSource("")
+        }
+    }
+
+    Loader{
+        id:deleteDeviceDialog
+        anchors.fill: parent
+        z:6
+    }
+
+    Connections{
+        target: deleteDeviceDialog.item
+
+        function onCancelPropagated(){
+            controller.modelChanged()
+            deleteheader.toggleSubmenu = false
+            Style.limit_to_only_one_device_selection = false
+            deleteDeviceDialog.setSource("")
+        }
+
+        function onComfirmDelete(){
+            controller.deleteDevice(Style.selectedSerialNumber)
+            controller.modelChanged()
+            deleteheader.toggleSubmenu = false
+            Style.limit_to_only_one_device_selection = false
+            deleteDeviceDialog.setSource("")
         }
     }
 

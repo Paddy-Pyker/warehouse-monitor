@@ -6,4 +6,5 @@ ModelTitleBar 1.0 ModelTitleBar.qml
 AddDeviceButton 1.0 AddDeviceButton.qml
 DevicesDelegate 1.0 DevicesDelegate.qml
 AddNewDevice 1.0 AddNewDevice.qml
+DeleteDeviceDialog 1.0 DeleteDeviceDialog.qml
 
