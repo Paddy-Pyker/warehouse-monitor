@@ -17,6 +17,7 @@ public:
                                 const double& humidity,const double& moisture_content=0.0);
     int device_availability(const QString& device_serialnumber);
     void addNewDevice(const QString& name,const QString& serialNumber);
+    void deleteDevice(const QString& serial_number);
 
     QVariantList load_readings_from_database(const QString& _serial_number, const QString& _selectedOption, const QString& _selectedDate);
     QVariantList get_devices_from_database();

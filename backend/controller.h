@@ -42,6 +42,7 @@ public slots:
     void fetch_http_data(const QString& device_id = "", const QString& last_timestamp="0");  //initial request for data
     void check_for_device_availability(const QString& serial_number);
     void addNewDevice(const QString& name,const QString& serialNumber);
+    void deleteDevice(const QString& serial_number);
 
 
 

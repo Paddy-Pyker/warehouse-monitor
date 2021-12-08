@@ -92,6 +92,14 @@ void DatabaseManager::addNewDevice(const QString &name, const QString &serialNum
    query.exec();
 }
 
+void DatabaseManager::deleteDevice(const QString &serial_number)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM device_name WHERE serial_number = :serial_number");
+    query.bindValue(":serial_number",serial_number);
+    query.exec();
+}
+
 QVariantList DatabaseManager::load_readings_from_database(const QString& _serial_number,const QString& _selectedOption,const QString& _selectedDate)
 {
 

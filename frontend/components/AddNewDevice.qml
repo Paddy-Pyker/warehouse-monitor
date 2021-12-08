@@ -64,7 +64,7 @@ Item {
 
     Rectangle{
         anchors.fill: parent
-        color: Qt.rgba(0,0,0,0.8)
+        color: Qt.rgba(0,0,0,0.7)
         z:1
 
         Rectangle{ //serial dialog
@@ -102,7 +102,7 @@ Item {
 
 
                 Keys.onPressed: {
-                    if ( event.key === Qt.Key_Enter  || event.key === Qt.Key_Return  )
+                    if ( (event.key === Qt.Key_Enter  || event.key === Qt.Key_Return  ) && serialValue.text)
                         btn.clicked()
                 }
 
@@ -127,11 +127,12 @@ Item {
                 visible: !busy.running
 
                 onClicked:{
-
-                    busy.running = true
-                    serialValue.readOnly = true
-                    serialValue.color = "grey"
-                    controller.check_for_device_availability(serialValue.text)
+                    if(serialValue.text){
+                        busy.running = true
+                        serialValue.readOnly = true
+                        serialValue.color = "grey"
+                        controller.check_for_device_availability(serialValue.text)
+                    }
                 }
             }
 
@@ -273,7 +274,7 @@ Item {
 
 
                 Keys.onPressed: {
-                    if ( event.key === Qt.Key_Enter  || event.key === Qt.Key_Return  )
+                    if ( (event.key === Qt.Key_Enter  || event.key === Qt.Key_Return) && nameValue.text  )
                         namebtn.clicked()
                 }
 
@@ -297,9 +298,11 @@ Item {
 
 
                 onClicked:{
-                    controller.addNewDevice(nameValue.text,serialNumber)
-                    controller.modelChanged()
-                    cancelPropagated()
+                    if(nameValue.text){
+                        controller.addNewDevice(nameValue.text,serialNumber)
+                        controller.modelChanged()
+                        cancelPropagated()
+                    }
                 }
             }
 

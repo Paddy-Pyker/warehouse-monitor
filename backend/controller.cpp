@@ -68,6 +68,11 @@ void Controller::addNewDevice(const QString &name, const QString &serialNumber)
     database->addNewDevice(name,serialNumber);
 }
 
+void Controller::deleteDevice(const QString &serial_number)
+{
+    database->deleteDevice(serial_number);
+}
+
 
 
 

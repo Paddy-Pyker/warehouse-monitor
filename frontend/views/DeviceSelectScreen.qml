@@ -81,6 +81,13 @@ Item {
             Style.limit_to_only_one_device_selection = false
 
         }
+
+        onDeleteButtonClicked:{
+            controller.deleteDevice(Style.selectedSerialNumber)
+            controller.modelChanged()
+            deleteheader.toggleSubmenu = false
+            Style.limit_to_only_one_device_selection = false
+        }
     }
 
     Custom.SettingsHeader{
@@ -136,6 +143,7 @@ Item {
             onPressedAndHeld: {
                 deleteheader.toggleSubmenu = true
                 deleteheader.focus = true
+                Style.selectedSerialNumber = serialnumber
             }
 
         }
