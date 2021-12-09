@@ -4,13 +4,13 @@ import QtQuick.Controls.Material 2.3
 import QtGraphicalEffects 1.0
 import assets 1.0
 
-
 Item {
+
     id:root
     anchors.fill: parent
 
     signal cancelPropagated()
-    signal comfirmDelete()
+    signal comfirmEdit(string newName)
 
     Keys.onBackPressed: {
         cancelPropagated()
@@ -24,38 +24,37 @@ Item {
 
     Component.onCompleted: {
         if(Style.wHeight > Style.wWidth){ //portrait
-            dialog.height = Qt.binding(function(){return (1/5 * Style.wHeight) < 160 ? (130 + content.height) : (1/5 * Style.wHeight + content.height - 30) })
+            dialog.height = Qt.binding(function(){return (1/5 * Style.wHeight) < 160 ? 160 : (1/5 * Style.wHeight) })
             dialog.width = Qt.binding(function(){return (0.8* Style.wWidth)})
-
         } else { //landscape
-            dialog.height = Qt.binding(function(){return (1/2.5 * Style.wHeight) < 137 ? (107 + content.height) : (1/2.5 * Style.wHeight - 30 + content.height)})
+            dialog.height = Qt.binding(function(){return (1/2.5 * Style.wHeight) < 137 ? 137 : (1/2.5 * Style.wHeight)})
             dialog.width = Qt.binding(function(){return (0.4 * Style.wWidth)})
         }
+
 
     }
 
     onHeightChanged: {
-
         if(Style.wHeight > Style.wWidth){ //portrait
-            dialog.height = Qt.binding(function(){return (1/5 * Style.wHeight) < 160 ? (130 + content.height) : (1/5 * Style.wHeight + content.height - 30) })
+            dialog.height = Qt.binding(function(){return (1/5 * Style.wHeight) < 160 ? 160 : (1/5 * Style.wHeight) })
             dialog.width = Qt.binding(function(){return (0.8* Style.wWidth)})
-
         } else { //landscape
-            dialog.height = Qt.binding(function(){return (1/2.5 * Style.wHeight) < 137 ? (107 + content.height) : (1/2.5 * Style.wHeight - 30 + content.height)})
+            dialog.height = Qt.binding(function(){return (1/2.5 * Style.wHeight) < 137 ? 137 : (1/2.5 * Style.wHeight)})
             dialog.width = Qt.binding(function(){return (0.4 * Style.wWidth)})
         }
-
     }
+
 
     Rectangle{
         anchors.fill: parent
         color: Qt.rgba(0,0,0,0.55)
         z:1
 
-        Rectangle{
+        Rectangle{ //serial dialog
             id:dialog
             anchors.centerIn: parent
             radius: 5
+
             layer.enabled: true
             layer.effect: DropShadow {
                 transparentBorder: true
@@ -68,42 +67,27 @@ Item {
                 smooth: true
             }
 
-            Text{
-                id:title
+            TextField {
+                id: nameValue
                 anchors{
                     top: parent.top
                     left: parent.left
                     right: parent.right
                     margins: Style.margin*2
-                    topMargin: Style.margin
                 }
 
-                text: "Remove Device"
-                horizontalAlignment: Text.AlignHCenter
-                Material.accent: Style.colorAccent
-                font.bold: true
-                font.pixelSize: Style.smallFontSize
-                color: "dimgrey"
-
-            }
-
-            Text {
-                id: content
-                anchors{
-                    top: title.bottom
-                    left: parent.left
-                    right: parent.right
-                    margins: Style.margin
-                }
-
-                text: "Are you sure you want to remove device with serial number <b>"+ Style.selectedSerialNumber +"</b> from this phone?"
-                horizontalAlignment: Text.AlignHCenter
+                placeholderText: Style.selectedName
                 Material.accent: Style.colorAccent
                 font.pixelSize: Style.smallTinyFontSize
-                color: "dimgrey"
-                wrapMode: Text.Wrap
-            }
+                verticalAlignment: Qt.AlignVCenter
 
+                Keys.onPressed: {
+                    if ( (event.key === Qt.Key_Enter  || event.key === Qt.Key_Return) && nameValue.text  )
+                        editbtn.clicked()
+                }
+
+
+            }
 
             Button{
                 id:cancelbuttn
@@ -128,7 +112,7 @@ Item {
             }
 
             Button{
-                id:deletebtn
+                id:editbtn
                 anchors{
                     bottom: parent.bottom
                     right: parent.right
@@ -141,16 +125,18 @@ Item {
 
                 Material.accent: "#EF9A9A"
 
-                text: "DELETE"
+                text: "RENAME"
                 font.bold: true
 
 
                 onClicked:{
+                    if(nameValue.text)
                     conf.start()
                 }
             }
 
         }
+
     }
 
     Timer{
@@ -162,9 +148,9 @@ Item {
     Timer{
         id:conf
         interval: 200
-        onTriggered: comfirmDelete()
+        onTriggered: comfirmEdit(nameValue.text)
     }
-
-
-
 }
+
+
+

@@ -86,6 +86,11 @@ Item {
             deleteDeviceDialog.setSource("qrc:/components/DeleteDeviceDialog.qml")
             deleteDeviceDialog.item.forceActiveFocus()
         }
+
+        onEditButtonClicked: {
+            editDeviceName.setSource("qrc:/components/EditDeviceName.qml");
+            editDeviceName.item.forceActiveFocus()
+        }
     }
 
     Custom.SettingsHeader{
@@ -142,6 +147,7 @@ Item {
                 deleteheader.toggleSubmenu = true
                 deleteheader.focus = true
                 Style.selectedSerialNumber = serialnumber
+                Style.selectedName = name
             }
 
         }
@@ -184,6 +190,31 @@ Item {
             deleteheader.toggleSubmenu = false
             Style.limit_to_only_one_device_selection = false
             deleteDeviceDialog.setSource("")
+        }
+    }
+
+    Loader{
+        id:editDeviceName
+        anchors.fill: parent
+        z:6
+    }
+
+    Connections{
+        target: editDeviceName.item
+
+        function onCancelPropagated(){
+            controller.modelChanged()
+            deleteheader.toggleSubmenu = false
+            Style.limit_to_only_one_device_selection = false
+            editDeviceName.setSource("")
+        }
+
+        function onComfirmEdit(newName){
+            console.log("New name :"+newName)
+            controller.modelChanged()
+            deleteheader.toggleSubmenu = false
+            Style.limit_to_only_one_device_selection = false
+            editDeviceName.setSource("")
         }
     }
 

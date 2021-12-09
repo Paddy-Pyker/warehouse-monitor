@@ -19,7 +19,7 @@ Rectangle {
     property Device device
 
     signal selectedDevice(string serial_number,string last_reading_timestamp)
-    signal pressedAndHeld(string serialnumber)
+    signal pressedAndHeld(string name,string serialnumber)
 
 
 
@@ -71,9 +71,8 @@ Rectangle {
         pressAndHoldInterval: 320
         onPressAndHold: {
             if(!Style.limit_to_only_one_device_selection){
-                console.log("held the button");
                 fix_state_on_hold  = true
-                pressedAndHeld(device.serialNumber)
+                pressedAndHeld(device.name,device.serialNumber)
                 root.state = "pressed"
                 Style.limit_to_only_one_device_selection = true
             }

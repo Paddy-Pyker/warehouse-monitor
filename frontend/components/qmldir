@@ -7,4 +7,5 @@ AddDeviceButton 1.0 AddDeviceButton.qml
 DevicesDelegate 1.0 DevicesDelegate.qml
 AddNewDevice 1.0 AddNewDevice.qml
 DeleteDeviceDialog 1.0 DeleteDeviceDialog.qml
+EditDeviceName 1.0 EditDeviceName.qml
 

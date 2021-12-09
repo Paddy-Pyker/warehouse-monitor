@@ -11,6 +11,7 @@ Item {
 
     property bool limit_to_only_one_device_selection : false
     property string selectedSerialNumber
+    property string selectedName
 
     // colors
     readonly property color colorReal:  "#008A5F"
