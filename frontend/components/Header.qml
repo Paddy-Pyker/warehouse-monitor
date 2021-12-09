@@ -7,6 +7,7 @@ import QtQuick.Controls.Styles 1.4
 Item {
 
     signal addNewDevice()
+    signal searchButtonClicked()
 
     id:root
     anchors.left: parent.left
@@ -51,7 +52,9 @@ Item {
 
         }
 
+
         Button{
+            id:menuico
             anchors{
                 bottom: parent.bottom
                 right: parent.right
@@ -96,6 +99,24 @@ Item {
 
 
             }
+
+        }
+
+        Button{
+            id:editbutton
+            anchors{
+                bottom: parent.bottom
+                right: menuico.left
+
+            }
+            flat: true
+            highlighted: true
+            Material.accent: "white"
+            font.pixelSize: Style.smallFontSize
+            text: "\uf002"
+            font.family: Style.fontAwesomeLight
+            onClicked: searchButtonClicked()
+
 
         }
     }
