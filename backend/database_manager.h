@@ -22,6 +22,7 @@ public:
 
     QVariantList load_readings_from_database(const QString& _serial_number, const QString& _selectedOption, const QString& _selectedDate);
     QVariantList get_devices_from_database();
+    QVariantList searchDevice(const QString& searchText);
 
 private:
     bool initialise();

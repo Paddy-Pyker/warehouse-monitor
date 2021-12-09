@@ -36,6 +36,7 @@ signals:
     void device_availability_is_ready(int responseCode);
 
     void modelChanged(); //rebounced signal to refresh model
+    void modelChanged_SearchResult(QVariantList result);
 
 public slots:
     void set_selectedOptions(const QString& option,const QString& date);
@@ -44,6 +45,7 @@ public slots:
     void addNewDevice(const QString& name,const QString& serialNumber);
     void deleteDevice(const QString& serial_number);
     void renameDevice(const QString& serialNumber,const QString& newName);
+    void searchDevice(const QString& searchText);
 
 
 

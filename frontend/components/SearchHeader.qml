@@ -68,9 +68,9 @@ Item {
             background: null
             onContentSizeChanged: {
                 Qt.inputMethod.reset()
-                if(textfield.text){
-                    console.log(textfield.text)
-                }
+                if(!textfield.text){
+                   controller.modelChanged()
+                } else controller.searchDevice(textfield.text)
 
 
             }

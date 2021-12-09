@@ -85,11 +85,11 @@ int DatabaseManager::device_availability(const QString &device_serialnumber)
 
 void DatabaseManager::addNewDevice(const QString &name, const QString &serialNumber)
 {
-   QSqlQuery query;
-   query.prepare("INSERT INTO device_name(name,serial_number) VALUES(:name,:serial_number)");
-   query.bindValue(":name",name);
-   query.bindValue(":serial_number",serialNumber);
-   query.exec();
+    QSqlQuery query;
+    query.prepare("INSERT INTO device_name(name,serial_number) VALUES(:name,:serial_number)");
+    query.bindValue(":name",name);
+    query.bindValue(":serial_number",serialNumber);
+    query.exec();
 }
 
 void DatabaseManager::deleteDevice(const QString &serial_number)
@@ -223,6 +223,30 @@ QVariantList DatabaseManager::get_devices_from_database()
 
     return devices;
 
+}
+
+QVariantList DatabaseManager::searchDevice(const QString &searchText)
+{
+    QSqlQuery query;
+    query.prepare("SELECT name,serial_number,last_reading_timestamp "
+                  "FROM device_name WHERE name like :searchText "
+                  "OR serial_number like :searchText ORDER BY created_at DESC");
+
+    query.bindValue(":searchText",QVariant("%" + searchText + "%"));
+
+    query.exec();
+
+    QVariantList filteredDevices;
+
+    while (query.next()) {
+        Device* device = new Device(this,query.value("name").toString(),
+                                    query.value("serial_number").toString(),
+                                    query.value("last_reading_timestamp").toString());
+        filteredDevices.append(QVariant::fromValue(device));
+    }
+
+
+    return filteredDevices;
 }
 
 bool DatabaseManager::initialise()

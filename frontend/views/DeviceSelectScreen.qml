@@ -86,6 +86,7 @@ Item {
             root.focus = true
             toggleSubmenu= false
             header.toggleSubmenu = true
+            devices.model = controller.get_devices_from_database
         }
     }
 
@@ -124,7 +125,7 @@ Item {
 
     Custom.AddDeviceButton{
         id:addDeviceBtn
-        visible: !deleteheader.visible
+        visible: !(deleteheader.visible || searchHeader.visible)
         z:5
         onAddNewDeviceClick: {
 
@@ -139,6 +140,11 @@ Item {
         function onModelChanged(){
             devices.model = controller.get_devices_from_database
         }
+
+        function onModelChanged_SearchResult(result){
+            devices.model = result
+        }
+
     }
 
     ListView{

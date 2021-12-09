@@ -78,6 +78,11 @@ void Controller::renameDevice(const QString &serialNumber, const QString &newNam
     database->renameDevice(serialNumber,newName);
 }
 
+void Controller::searchDevice(const QString &searchText)
+{
+    emit modelChanged_SearchResult(database->searchDevice(searchText));
+}
+
 
 
 
