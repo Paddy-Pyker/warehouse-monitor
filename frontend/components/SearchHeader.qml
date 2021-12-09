@@ -5,7 +5,8 @@ import assets 1.0
 
 Item {
     signal cancelSelectDevice()
-    property bool toggleSubmenu: true
+    property bool toggleSubmenu: false
+    property alias autoFocus: textfield
 
     id:root
 
@@ -24,6 +25,7 @@ Item {
         } else { //landscape
             height = Qt.binding(function(){return (1/5 * Style.wHeight) < 65 ? 65 : (1/5 * Style.wHeight)})
         }
+
     }
 
     onHeightChanged: {
@@ -69,7 +71,7 @@ Item {
             onContentSizeChanged: {
                 Qt.inputMethod.reset()
                 if(!textfield.text){
-                   controller.modelChanged()
+                    controller.modelChanged()
                 } else controller.searchDevice(textfield.text)
 
 

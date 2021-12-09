@@ -8,6 +8,7 @@ Item {
     id:root
     signal cancelPropagated()
     property string serialNumber
+    property alias autoFocus:serialValue
     Keys.onBackPressed: {
         cancelPropagated()
     }
@@ -257,6 +258,8 @@ Item {
             height: serial_dialog.height
             radius: 5
             visible: false
+
+            onVisibleChanged: if(visible) nameValue.forceActiveFocus()
 
             TextField {
                 id: nameValue

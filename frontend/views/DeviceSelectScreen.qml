@@ -67,13 +67,13 @@ Item {
         onAddNewDevice: {
 
             addNewDevice.setSource("qrc:/components/AddNewDevice.qml")
-            addNewDevice.item.forceActiveFocus()
+            addNewDevice.item.autoFocus.forceActiveFocus()
         }
 
         onSearchButtonClicked: {
             searchHeader.toggleSubmenu = true
-            searchHeader.focus = true
             header.toggleSubmenu = false
+            searchHeader.autoFocus.forceActiveFocus()
         }
     }
 
@@ -130,7 +130,7 @@ Item {
         onAddNewDeviceClick: {
 
             addNewDevice.setSource("qrc:/components/AddNewDevice.qml")
-            addNewDevice.item.forceActiveFocus()
+            addNewDevice.item.autoFocus.forceActiveFocus()
         }
 
     }
