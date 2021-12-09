@@ -82,8 +82,9 @@ Item {
                 verticalAlignment: Qt.AlignVCenter
 
                 Keys.onPressed: {
-                    if ( (event.key === Qt.Key_Enter  || event.key === Qt.Key_Return) && nameValue.text  )
-                        editbtn.clicked()
+                    if ((event.key === Qt.Key_Enter  || event.key === Qt.Key_Return))
+                        conf.start()
+
                 }
 
 
@@ -130,8 +131,7 @@ Item {
 
 
                 onClicked:{
-                    if(nameValue.text)
-                    conf.start()
+                        conf.start()
                 }
             }
 
@@ -148,7 +148,10 @@ Item {
     Timer{
         id:conf
         interval: 200
-        onTriggered: comfirmEdit(nameValue.text)
+        onTriggered: {
+            if(nameValue.text)
+            comfirmEdit(nameValue.text)
+        }
     }
 }
 

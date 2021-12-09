@@ -274,8 +274,8 @@ Item {
 
 
                 Keys.onPressed: {
-                    if ( (event.key === Qt.Key_Enter  || event.key === Qt.Key_Return) && nameValue.text  )
-                        namebtn.clicked()
+                    if ( (event.key === Qt.Key_Enter  || event.key === Qt.Key_Return))
+                        conf.start()
                 }
 
 
