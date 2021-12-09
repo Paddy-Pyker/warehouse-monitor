@@ -30,8 +30,6 @@ Item {
             dialog.height = Qt.binding(function(){return (1/2.5 * Style.wHeight) < 137 ? 137 : (1/2.5 * Style.wHeight)})
             dialog.width = Qt.binding(function(){return (0.4 * Style.wWidth)})
         }
-
-
     }
 
     onHeightChanged: {
@@ -84,9 +82,7 @@ Item {
                 Keys.onPressed: {
                     if ((event.key === Qt.Key_Enter  || event.key === Qt.Key_Return))
                         conf.start()
-
                 }
-
 
             }
 
@@ -131,7 +127,7 @@ Item {
 
 
                 onClicked:{
-                        conf.start()
+                    conf.start()
                 }
             }
 
@@ -150,7 +146,7 @@ Item {
         interval: 200
         onTriggered: {
             if(nameValue.text)
-            comfirmEdit(nameValue.text)
+                comfirmEdit(nameValue.text)
         }
     }
 }

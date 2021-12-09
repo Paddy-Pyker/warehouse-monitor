@@ -10,6 +10,7 @@ Item {
     id:root
 
     Keys.onBackPressed: {
+        textfield.clear()
         cancelSelectDevice()
     }
     anchors.left: parent.left
@@ -49,7 +50,7 @@ Item {
             font.pixelSize: Style.smallFontSize
             text: "\uf060"
             font.family: Style.fontAwesomeLight
-            onClicked: cancelSelectDevice()
+            onClicked: {textfield.clear();cancelSelectDevice()}
 
         }
 
@@ -65,8 +66,18 @@ Item {
             color: "white"
             Material.accent: Style.colorAccent
             background: null
+            onContentSizeChanged: {
+                Qt.inputMethod.reset()
+                if(textfield.text){
+                    console.log(textfield.text)
+                }
+
+
+            }
+
         }
 
 
     }
+
 }
