@@ -76,7 +76,11 @@ Item {
 
 
                 MenuItem {
-                    text: "Add New Device"
+                    contentItem: Text {
+                        text: "Add New Device"
+                        color: Qt.rgba(0,0,0,0.7)
+                    }
+
                     onCanceled: highlighted = false
                     onTriggered: {
                         highlighted = false
@@ -86,7 +90,10 @@ Item {
                 }
 
                 MenuItem {
-                    text: "Quit Application"
+                    contentItem: Text {
+                        text: "Quit Application"
+                        color: Qt.rgba(0,0,0,0.7)
+                    }
                     onCanceled: highlighted = false
                     onTriggered: {
                         highlighted = false

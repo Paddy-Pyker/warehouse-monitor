@@ -95,7 +95,7 @@ Item {
 
                 placeholderText: "Enter Serial Number"
                 Material.accent: Style.colorAccent
-                font.pixelSize: Style.smallFontSize
+                font.pixelSize: Style.smallTinyFontSize
                 verticalAlignment: Qt.AlignVCenter
 
                 inputMethodHints: Qt.ImhDigitsOnly
