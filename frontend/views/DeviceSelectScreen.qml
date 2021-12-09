@@ -69,6 +69,24 @@ Item {
             addNewDevice.setSource("qrc:/components/AddNewDevice.qml")
             addNewDevice.item.forceActiveFocus()
         }
+
+        onSearchButtonClicked: {
+            searchHeader.toggleSubmenu = true
+            searchHeader.focus = true
+            header.toggleSubmenu = false
+        }
+    }
+
+
+    Custom.SearchHeader{
+        id:searchHeader
+        toggleSubmenu: false
+
+        onCancelSelectDevice: {
+            root.focus = true
+            toggleSubmenu= false
+            header.toggleSubmenu = true
+        }
     }
 
     Custom.DeleteHeader{

@@ -8,6 +8,9 @@ Item {
 
     signal addNewDevice()
     signal searchButtonClicked()
+    property bool toggleSubmenu:true
+
+    visible: toggleSubmenu
 
     id:root
     anchors.left: parent.left

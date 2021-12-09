@@ -10,5 +10,6 @@
         <file alias="AddNewDevice.qml">components/AddNewDevice.qml</file>
         <file alias="DeleteDeviceDialog.qml">components/DeleteDeviceDialog.qml</file>
         <file alias="EditDeviceName.qml">components/EditDeviceName.qml</file>
+        <file alias="SearchHeader.qml">components/SearchHeader.qml</file>
     </qresource>
 </RCC>
