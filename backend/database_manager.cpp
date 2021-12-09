@@ -100,6 +100,15 @@ void DatabaseManager::deleteDevice(const QString &serial_number)
     query.exec();
 }
 
+void DatabaseManager::renameDevice(const QString& serialNumber,const QString &newName)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE device_name SET name=:name WHERE serial_number=:serial_number");
+    query.bindValue(":name",newName);
+    query.bindValue(":serial_number",serialNumber);
+    query.exec();
+}
+
 QVariantList DatabaseManager::load_readings_from_database(const QString& _serial_number,const QString& _selectedOption,const QString& _selectedDate)
 {
 

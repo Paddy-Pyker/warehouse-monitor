@@ -73,6 +73,11 @@ void Controller::deleteDevice(const QString &serial_number)
     database->deleteDevice(serial_number);
 }
 
+void Controller::renameDevice(const QString &serialNumber, const QString &newName)
+{
+    database->renameDevice(serialNumber,newName);
+}
+
 
 
 

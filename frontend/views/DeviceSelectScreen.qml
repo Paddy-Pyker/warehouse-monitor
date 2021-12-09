@@ -210,7 +210,7 @@ Item {
         }
 
         function onComfirmEdit(newName){
-            console.log("New name :"+newName)
+            controller.renameDevice(Style.selectedSerialNumber,newName)
             controller.modelChanged()
             deleteheader.toggleSubmenu = false
             Style.limit_to_only_one_device_selection = false

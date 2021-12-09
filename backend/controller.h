@@ -43,6 +43,7 @@ public slots:
     void check_for_device_availability(const QString& serial_number);
     void addNewDevice(const QString& name,const QString& serialNumber);
     void deleteDevice(const QString& serial_number);
+    void renameDevice(const QString& serialNumber,const QString& newName);
 
 
 
