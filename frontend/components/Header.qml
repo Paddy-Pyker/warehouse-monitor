@@ -9,6 +9,8 @@ Item {
     signal addNewDevice()
     signal searchButtonClicked()
     property bool toggleSubmenu:true
+    property alias disableEdit: editbutton.enabled
+    property alias disableMenu: menuico.enabled
 
     visible: toggleSubmenu
 

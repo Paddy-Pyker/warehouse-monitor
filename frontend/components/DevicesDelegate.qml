@@ -18,7 +18,7 @@ Rectangle {
 
     property Device device
 
-    signal selectedDevice(string serial_number,string last_reading_timestamp)
+    signal selectedDevice(string name,string serial_number,string last_reading_timestamp)
     signal pressedAndHeld(string name,string serialnumber)
 
 
@@ -85,7 +85,7 @@ Rectangle {
         onTriggered: {
             if(!fix_state_on_hold){
                 root.state="";
-                selectedDevice(serialnumber.text,devices.last_reading_timestamp)
+                selectedDevice(name.text,serialnumber.text,devices.last_reading_timestamp)
             }
         }
     }

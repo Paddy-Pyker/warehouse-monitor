@@ -7,6 +7,7 @@ Item {
 
     signal settingsButtonClicked()
     property bool toggleSubmenu: true
+    property alias customName: name.text
 
     id:root
     anchors.left: parent.left
@@ -43,10 +44,10 @@ Item {
             width: 1/2 * parent.width
             color: "white"
             text: qsTr("Warehouse Monitor")
-            font.pixelSize: Style.mediumFontSize
-            font.family: Style.corsiva
+            font.pixelSize: Style.smallTinyFontSize
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
 
         }
 

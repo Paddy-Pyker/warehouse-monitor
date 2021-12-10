@@ -68,14 +68,6 @@ Item {
             color: "white"
             Material.accent: Style.colorAccent
             background: null
-            //            onContentSizeChanged: {
-            //                Qt.inputMethod.reset()
-            //                if(!textfield.text){
-            //                    controller.modelChanged()
-            //                } else controller.searchDevice(textfield.text)
-
-
-            //            }
 
             onDisplayTextChanged: {
                 Qt.inputMethod.commit()

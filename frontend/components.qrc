@@ -11,5 +11,8 @@
         <file alias="DeleteDeviceDialog.qml">components/DeleteDeviceDialog.qml</file>
         <file alias="EditDeviceName.qml">components/EditDeviceName.qml</file>
         <file alias="SearchHeader.qml">components/SearchHeader.qml</file>
+        <file alias="GraphDisplay.qml">components/GraphDisplay.qml</file>
+        <file alias="GraphEditDialog.qml">components/GraphEditDialog.qml</file>
+        <file alias="SettingsPage.qml">components/SettingsPage.qml</file>
     </qresource>
 </RCC>

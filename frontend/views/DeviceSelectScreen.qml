@@ -115,6 +115,11 @@ Item {
     Custom.SettingsHeader{
         id:settingsheader
         toggleSubmenu: false
+
+        onSettingsButtonClicked: {
+            settingsPage.setSource("qrc:/components/SettingsPage.qml")
+            settingsPage.item.forceActiveFocus()
+        }
     }
 
 
@@ -163,9 +168,13 @@ Item {
         delegate: Custom.DevicesDelegate{
             device: modelData
             onSelectedDevice: {
-                //                    connectingDialog.source = "qrc:/components/ConnectingDialog.qml"
-                //                    connectingDialog.item.description = id
-                //                    bluetoothManager.device_selected(id,mac)
+                settingsheader.toggleSubmenu = true
+                settingsheader.customName = name
+                header.disableEdit = false
+                header.disableMenu = false
+                graphLoader.setSource("qrc:/components/GraphDisplay.qml")
+                graphLoader.item.forceActiveFocus()
+
             }
             onPressedAndHeld: {
                 deleteheader.toggleSubmenu = true
@@ -241,5 +250,65 @@ Item {
             editDeviceName.setSource("")
         }
     }
+
+    Loader{
+        id:graphLoader
+        anchors{
+            top: header.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+
+        }
+        z:7
+    }
+
+    Connections{
+        target: graphLoader.item
+        function onCancelPropagated(){
+            graphExitDialog.setSource("qrc:/components/GraphEditDialog.qml")
+            graphExitDialog.item.forceActiveFocus()
+        }
+    }
+
+    Loader{
+        id:graphExitDialog
+        anchors.fill: parent
+        z:8
+    }
+
+    Connections{
+        target: graphExitDialog.item
+        function onCancelPropagated(){
+            graphExitDialog.setSource("")
+            graphLoader.item.forceActiveFocus()
+        }
+
+        function onGoBackToMainMenu(){
+            graphExitDialog.setSource("")
+            graphLoader.setSource("")
+            settingsheader.toggleSubmenu = false
+            header.disableEdit = true
+            header.disableMenu = true
+            deleteheader.toggleSubmenu = false
+            controller.modelChanged()
+        }
+    }
+
+
+    Loader{
+        id:settingsPage
+        anchors.fill: parent
+        z:100
+    }
+
+    Connections{
+        target: settingsPage.item
+        function onCancelPropagated(){
+            settingsPage.setSource("")
+            graphLoader.item.forceActiveFocus()
+        }
+    }
+
 
 }
