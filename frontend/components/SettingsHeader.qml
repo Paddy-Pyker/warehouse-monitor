@@ -6,6 +6,7 @@ import assets 1.0
 Item {
 
     signal settingsButtonClicked()
+    signal tableButtonClicked()
     property bool toggleSubmenu: true
     property alias customName: name.text
 
@@ -52,6 +53,7 @@ Item {
         }
 
                 Button{
+                    id:sett
                     anchors{
                         bottom: parent.bottom
                         right: parent.right
@@ -67,6 +69,22 @@ Item {
 
 
                 }
+
+//                Button{
+//                    anchors{
+//                        bottom: parent.bottom
+//                        right: sett.left
+//                    }
+//                    flat: true
+//                    highlighted: true
+//                    Material.accent: "white"
+//                    font.pixelSize: Style.smallFontSize
+//                    text: "\uf0ce"
+//                    font.family: Style.fontAwesomeLight
+//                    onClicked: tableButtonClicked()
+
+
+//                }
 
 
 

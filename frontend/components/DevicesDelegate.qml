@@ -60,6 +60,7 @@ Rectangle {
 
 
     property bool fix_state_on_hold
+    property bool fix_click_on_scroll
 
     MouseArea{
         anchors.fill: parent
@@ -67,7 +68,11 @@ Rectangle {
             root.state = "pressed";
             timer.start()
         }
-        onCanceled: root.state = ""
+        onCanceled: {
+            root.state = ""
+            fix_click_on_scroll = true
+        }
+
         pressAndHoldInterval: 320
         onPressAndHold: {
             if(!Style.limit_to_only_one_device_selection){
@@ -83,9 +88,10 @@ Rectangle {
         id:timer
         interval: 350
         onTriggered: {
-            if(!fix_state_on_hold){
+
+            if((!fix_state_on_hold) && (!fix_click_on_scroll)){
                 root.state="";
-                selectedDevice(name.text,serialnumber.text,devices.last_reading_timestamp)
+                selectedDevice(name.text,serialnumber.text,device.last_reading_timestamp)
             }
         }
     }

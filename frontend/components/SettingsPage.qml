@@ -10,13 +10,12 @@ Item {
     }
 
     MouseArea{
-     anchors.fill: parent
-     onCanceled: console.log("")
+        anchors.fill: parent
+        onCanceled: console.log("")
     }
 
     Rectangle{
         anchors.fill: parent
-        color: "orange"
 
         Text {
             anchors.centerIn: parent

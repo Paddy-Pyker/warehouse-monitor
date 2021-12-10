@@ -54,8 +54,8 @@ private:
 
     DatabaseManager* database;
     NetworkManager* network;
-    QString selectedOption="daily";
-    QString selectedDate="0";
+    QString selectedOption="";
+    QString selectedDate="";
     QString device_serialNUmber;
 
 };

@@ -34,7 +34,10 @@ void DatabaseManager::set_device_latest_timestamp(const QString &serial_number, 
     query.prepare("UPDATE device_name set last_reading_timestamp=:timestamp WHERE serial_number=:serial_number");
     query.bindValue(":timestamp",timestamp);
     query.bindValue(":serial_number",serial_number);
-    query.exec();
+
+    if(query.exec())
+    qDebug()<<"query worked";
+
 
 
 }

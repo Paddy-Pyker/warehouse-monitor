@@ -42,6 +42,7 @@ Item {
     Component{
         id:closer
         Text {
+            id:tx
             text: qsTr("press again to exit")
             color: "darkgreen"
             horizontalAlignment: Text.AlignHCenter
@@ -120,6 +121,7 @@ Item {
             settingsPage.setSource("qrc:/components/SettingsPage.qml")
             settingsPage.item.forceActiveFocus()
         }
+        onTableButtonClicked:  console.log("table button clicked")
     }
 
 
@@ -168,6 +170,8 @@ Item {
         delegate: Custom.DevicesDelegate{
             device: modelData
             onSelectedDevice: {
+                Style.selectedSerialNumber = serial_number
+                Style.lastReadingTimestamp = last_reading_timestamp
                 settingsheader.toggleSubmenu = true
                 settingsheader.customName = name
                 header.disableEdit = false
