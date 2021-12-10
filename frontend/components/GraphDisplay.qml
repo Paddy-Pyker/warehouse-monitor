@@ -13,8 +13,6 @@ Item {
     signal cancelPropagated()
 
     property list<Readings> readings
-    //    property date minDate:new Date('2021-11-17T03:24:00')
-    //    property date maxDate:new Date('2021-11-17T17:54:00')
     property date minDate
     property date maxDate
 
