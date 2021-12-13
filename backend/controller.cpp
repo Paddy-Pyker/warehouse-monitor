@@ -50,7 +50,7 @@ void Controller::set_selectedOptions(const QString &option, const QString &date)
     selectedDate = date;
     selectedOption = option;
 
-    emit selections_changed();
+    emit load_from_db_rebounced();
 }
 
 void Controller::fetch_http_data(const QString &device_id, const QString &last_timestamp)

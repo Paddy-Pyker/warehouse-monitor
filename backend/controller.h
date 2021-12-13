@@ -28,7 +28,6 @@ public:
     const QString& get_selectedDate();
 
 signals:
-    void selections_changed();  //listen to this signal to update the options values
     void load_from_db_rebounced(); //listen to this signal to update the readings model
     void Loading_data_from_server();//listen to this signal to show the progress bar
     void Loading_completed_succesfully();//listen to this signal to disable progress bar

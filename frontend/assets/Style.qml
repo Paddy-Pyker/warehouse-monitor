@@ -14,6 +14,9 @@ Item {
     property string selectedName
     property string lastReadingTimestamp
 
+    property double selectedDate:0
+    property string selectedOption
+
 
     // colors
     readonly property color colorReal:  "#008A5F"

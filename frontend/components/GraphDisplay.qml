@@ -34,6 +34,7 @@ Item {
 
         function onLoad_from_db_rebounced(){
             readings = controller.load_readings_from_database
+            console.log(readings.length)
 
             if(readings.length){
                 minDate = new Date(parseInt(readings[0].timestamp))
@@ -42,6 +43,15 @@ Item {
                 minDate = new Date((new Date()).getTime() - 86400000)
                 maxDate = new Date()
             }
+
+            temperature_line.clear()
+            temperature_line_scatter.clear()
+            humidity_line.clear()
+            humidity_line_scatter.clear()
+            temperature_spline.clear()
+            temperature_spline_scatter.clear()
+            humidity_spline.clear()
+            humidity_spline_scatter.clear()
 
             for(let i = 0; i < readings.length; i++){
                 temperature_line.append(readings[i].timestamp,readings[i].temperature)

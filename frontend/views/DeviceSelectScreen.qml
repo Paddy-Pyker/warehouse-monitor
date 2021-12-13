@@ -296,6 +296,9 @@ Item {
             header.disableMenu = true
             deleteheader.toggleSubmenu = false
             controller.modelChanged()
+            Style.selectedDate=0
+            Style.selectedOption=""
+            controller.set_selectedOptions("","")
         }
     }
 

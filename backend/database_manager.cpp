@@ -115,6 +115,7 @@ void DatabaseManager::renameDevice(const QString& serialNumber,const QString &ne
 QVariantList DatabaseManager::load_readings_from_database(const QString& _serial_number,const QString& _selectedOption,const QString& _selectedDate)
 {
 
+    qDebug()<<_serial_number<<_selectedDate<<_selectedOption;
     QDateTime time = QDateTime::fromMSecsSinceEpoch(_selectedDate.toULongLong(),Qt::UTC);  //ensure selectedDate is in ms
 
     QString serial_number = _serial_number;
@@ -123,9 +124,11 @@ QVariantList DatabaseManager::load_readings_from_database(const QString& _serial
     QString month = time.toString("MMM");
     QString day = time.toString("ddd d");
 
+    qDebug()<<year<<month<<day;
+
     QSqlQuery query;
 
-    if(option == "daily"){
+    if(option == "Daily"){
         QString query_string = "SELECT temperature,humidity,timestamp from device_readings "
                                "WHERE serial_number=:serial_number GROUP by time "
                                "HAVING year=:year and month=:month and day=:day "
@@ -137,7 +140,7 @@ QVariantList DatabaseManager::load_readings_from_database(const QString& _serial
         query.bindValue(":month",month);
         query.bindValue(":day",day);
 
-    } else if (option == "weekly") {
+    } else if (option == "Weekly") {
 
         QString query_string = "SELECT Round(AVG(temperature),2) as temperature,"
                                "Round(AVG(humidity),2) as humidity,"
@@ -151,7 +154,7 @@ QVariantList DatabaseManager::load_readings_from_database(const QString& _serial
         query.bindValue(":year",year);
         query.bindValue(":month",month);
 
-    } else if (option == "monthly") {
+    } else if (option == "Monthly") {
 
         QString query_string = "SELECT Round(AVG(temperature),2) as temperature,"
                                "Round(AVG(humidity),2) as humidity,"
@@ -164,7 +167,7 @@ QVariantList DatabaseManager::load_readings_from_database(const QString& _serial
         query.bindValue(":serial_number",serial_number);
         query.bindValue(":year",year);
 
-    } else if (option == "annually") {
+    } else if (option == "Annually") {
 
         QString query_string = "SELECT Round(AVG(temperature),2) as temperature,"
                                "Round(AVG(humidity),2) as humidity,"
