@@ -189,6 +189,10 @@ Item {
                     color: "dodgerblue"
                     width: 2
 
+     // with the onclick present at the LineSeries and removed from the ScatterSeries,
+     // and at the same time their positions are switched,
+     // the end user can get the y-values at any particular point on the graph
+
                 }
 
 

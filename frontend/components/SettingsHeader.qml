@@ -39,7 +39,9 @@ Item {
             id: name
             anchors{
                 bottom: parent.bottom
-                bottomMargin: Style.margin *.5
+                verticalCenter: sett.verticalCenter
+                left: parent.left
+                leftMargin: Style.margin
             }
 
             width: 1/2 * parent.width
@@ -47,7 +49,7 @@ Item {
             text: qsTr("Warehouse Monitor")
             font.pixelSize: Style.smallTinyFontSize
             font.bold: true
-            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
 
         }
@@ -69,22 +71,6 @@ Item {
 
 
                 }
-
-//                Button{
-//                    anchors{
-//                        bottom: parent.bottom
-//                        right: sett.left
-//                    }
-//                    flat: true
-//                    highlighted: true
-//                    Material.accent: "white"
-//                    font.pixelSize: Style.smallFontSize
-//                    text: "\uf0ce"
-//                    font.family: Style.fontAwesomeLight
-//                    onClicked: tableButtonClicked()
-
-
-//                }
 
 
 
