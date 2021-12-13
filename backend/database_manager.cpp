@@ -35,8 +35,7 @@ void DatabaseManager::set_device_latest_timestamp(const QString &serial_number, 
     query.bindValue(":timestamp",timestamp);
     query.bindValue(":serial_number",serial_number);
 
-    if(query.exec())
-    qDebug()<<"query worked";
+    query.exec();
 
 
 
@@ -132,7 +131,7 @@ QVariantList DatabaseManager::load_readings_from_database(const QString& _serial
         QString query_string = "SELECT temperature,humidity,timestamp from device_readings "
                                "WHERE serial_number=:serial_number GROUP by time "
                                "HAVING year=:year and month=:month and day=:day "
-                               "ORDER by timestamp LIMIT 10";
+                               "ORDER by timestamp DESC LIMIT 10";
 
         query.prepare(query_string);
         query.bindValue(":serial_number",serial_number);
@@ -147,7 +146,7 @@ QVariantList DatabaseManager::load_readings_from_database(const QString& _serial
                                "timestamp from device_readings "
                                "WHERE serial_number=:serial_number "
                                "GROUP by day HAVING year=:year and "
-                               "month=:month ORDER by timestamp LIMIT 7";
+                               "month=:month ORDER by timestamp DESC LIMIT 7";
 
         query.prepare(query_string);
         query.bindValue(":serial_number",serial_number);
@@ -161,7 +160,7 @@ QVariantList DatabaseManager::load_readings_from_database(const QString& _serial
                                "timestamp from device_readings "
                                "WHERE serial_number=:serial_number "
                                "GROUP by month HAVING year=:year"
-                               " ORDER by timestamp LIMIT 10";
+                               " ORDER by timestamp DESC LIMIT 10";
 
         query.prepare(query_string);
         query.bindValue(":serial_number",serial_number);
@@ -173,7 +172,7 @@ QVariantList DatabaseManager::load_readings_from_database(const QString& _serial
                                "Round(AVG(humidity),2) as humidity,"
                                "timestamp from device_readings "
                                "WHERE serial_number=:serial_number "
-                               "GROUP by year ORDER by timestamp";
+                               "GROUP by year ORDER by timestamp DESC";
 
         query.prepare(query_string);
         query.bindValue(":serial_number",serial_number);
