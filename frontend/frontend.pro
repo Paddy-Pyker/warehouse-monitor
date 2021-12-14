@@ -1,7 +1,5 @@
 QT += quick qml charts sql quickcontrols2
 
-TARGET = sesi_technologies
-
 INCLUDEPATH += source \
     $$PWD/../backend
 
@@ -31,13 +29,21 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
 
-contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+#contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \
         $$PWD/android
-}
+#}
 
 DISTFILES += \
     android/AndroidManifest.xml \
+    android/AndroidManifest.xml \
+#    android/build.gradle \
+#    android/gradle.properties \
+#    android/gradle/wrapper/gradle-wrapper.jar \
+#    android/gradle/wrapper/gradle-wrapper.properties \
+#    android/gradlew \
+#    android/gradlew.bat \
+ \ #   android/res/values/libs.xml
     android/build.gradle \
     android/gradle.properties \
     android/gradle/wrapper/gradle-wrapper.jar \
@@ -45,6 +51,8 @@ DISTFILES += \
     android/gradlew \
     android/gradlew.bat \
     android/res/values/libs.xml
+
+ANDROID_EXTRA_LIBS = /home/atsu/warehouse-monitor/frontend/android_openssl/latest/arm/libcrypto_1_1.so /home/atsu/warehouse-monitor/frontend/android_openssl/latest/arm/libssl_1_1.so /home/atsu/warehouse-monitor/frontend/../../build-warehouse-monitor-Android_Qt_5_15_2_Clang_Multi_Abi-Release/backend/libbackend_armeabi-v7a.so
 
 
 
