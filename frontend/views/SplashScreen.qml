@@ -103,6 +103,7 @@ Item {
 
     Component.onCompleted: {
         splashTimer.start()
+        onHeightChanged()
     }
 }
 

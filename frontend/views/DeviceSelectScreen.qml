@@ -43,7 +43,7 @@ Item {
         id:closer
         Text {
             id:tx
-            text: qsTr("press again to exit")
+            text: qsTr("Touch again to exit")
             color: "darkgreen"
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Style.tinyFontSize

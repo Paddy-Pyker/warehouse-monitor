@@ -91,7 +91,7 @@ Item {
 
         Flickable{
             anchors.fill: parent
-            contentHeight: Screen.primaryOrientation == Qt.PortraitOrientation? Screen.desktopAvailableHeight : Screen.desktopAvailableHeight*2
+            contentHeight: Screen.primaryOrientation == Qt.PortraitOrientation? Screen.desktopAvailableHeight*1.15 : Screen.desktopAvailableHeight*2.15
 
             Rectangle {
                 id: mainForm
@@ -350,7 +350,7 @@ Item {
                     id:combo
                     anchors{
                         top: calendar.bottom
-                        topMargin: mainForm.height*.2
+                        topMargin: mainForm.height*.1
                         horizontalCenter: parent.horizontalCenter
                     }
                     model: ["Daily", "Weekly", "Monthly", "Annually"]
