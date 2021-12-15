@@ -91,12 +91,10 @@ Item {
 
         Flickable{
             anchors.fill: parent
-            contentHeight: Screen.primaryOrientation == Qt.PortraitOrientation? Screen.desktopAvailableHeight*1.15 : Screen.desktopAvailableHeight*2.15
-
+            contentHeight: mainForm.height
             Rectangle {
                 id: mainForm
                 anchors.fill: parent
-                height: cellSize * 12
                 width: cellSize * 8
                 property double mm: Screen.pixelDensity
                 property double cellSize: mm * 7
@@ -105,6 +103,22 @@ Item {
                 clip: true
                 signal ok
                 signal cancel
+
+                Component.onCompleted: {
+                    if(Style.wHeight > Style.wWidth){ //portrait
+                        height = Qt.binding(function(){return (cellSize * 12 + btn.height + combo.height + Style.margin*6)})
+                    } else { //landscape
+                        height = Qt.binding(function(){return (cellSize * 12 + btn.height + combo.height + Style.margin*4)})
+                    }
+                }
+
+                onHeightChanged: {
+                    if(Style.wHeight > Style.wWidth){ //portrait
+                        height = Qt.binding(function(){return (cellSize * 12 + btn.height + combo.height + Style.margin*6)})
+                    } else { //landscape
+                        height = Qt.binding(function(){return (cellSize * 12 + btn.height + combo.height + Style.margin*4)})
+                    }
+                }
 
 
                 Rectangle {
